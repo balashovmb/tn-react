@@ -2,6 +2,9 @@ import React from 'react';
 
 class AboutAuthor extends React.Component {
   render() {
+    if (!this.props.author) {
+      return <div>Информация об авторе отсутствует.</div>
+    }
     const {
       author: { Name, Email, Info, Avatar }
     } = this.props
