@@ -3,6 +3,9 @@ import AboutAuthor from './AboutAuthor';
 
 class Book extends React.Component {
   render() {
+    if (!this.props.book) {
+      return <div>Информация о книге отсутствует.</div>
+    }    
     const {
       book: { 
         Title,
@@ -13,7 +16,7 @@ class Book extends React.Component {
         Progress,
         Author,
         MinimalPrice,
-        ExpectedProice,
+        ExpectedPrice,
         Amount,
         ExpectedAmount
       }
@@ -33,7 +36,7 @@ class Book extends React.Component {
             <div>Язык: {Language}</div>
             <div>Процент прогресса: {Progress}</div>
             <div>Минимальная цена: {MinimalPrice}</div>
-            <div>Желаемая цена: {ExpectedProice}</div>
+            <div>Желаемая цена: {ExpectedPrice}</div>
             <div>Собранная сумма: {Amount}</div>
             <div>Ожидаемая сумма: {ExpectedAmount}</div>
           </div>
