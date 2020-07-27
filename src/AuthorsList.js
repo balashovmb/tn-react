@@ -14,6 +14,9 @@ class AuthorsList extends React.Component {
   render() {
     let { authors } = this.props;
 
+    if (!authors || authors.length === 0)
+      { return (<div>Информация об авторах отсутствует.</div>) }
+
     const authorsLength = authors.length;
 
     if (!this.state.allAuthors) {

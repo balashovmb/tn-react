@@ -20,7 +20,25 @@ test('renders information about the author', () => {
   expect(getByAltText('Стив Макконнелл').src).toBe(author.Avatar);
 })
 
-test('renders empty author\'s place', () =>{
-  const { getByText } = render(<AboutAuthor/>);
+test('renders empty author\'s place', () => {
+  const { getByText } = render(<AboutAuthor />);
   expect(getByText('Информация об авторе отсутствует.')).toBeInTheDocument();
+})
+
+test('renders photo is not included message', () => {
+  const author = {
+    Name: 'Стив Макконнелл',
+    Info: 'Признанный авторитет и известнейший автор в сообществе разработчиков. Он занимает должность главного разработчика ПО в компании Construx Software.',
+    Email: 'steve@mcconnel.com',
+  }
+  const { getByAltText } = render(<AboutAuthor author={author} />);
+  expect(getByAltText('Фото отсутствует.')).toBeInTheDocument();
+})
+
+test('works when author includes only name', () => {
+  const author = {
+    Name: 'Стив Макконнелл',
+  }
+  const { getByText } = render(<AboutAuthor author={author} />);
+  expect(getByText('Стив Макконнелл')).toBeInTheDocument();
 })
