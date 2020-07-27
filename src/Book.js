@@ -4,15 +4,11 @@ import SubscriptionTerms from './SubscribtionTerms';
 
 class Book extends React.Component {
   authors(Authors) {
-    let resultString = 'Автор';
-    if (Authors.length > 1) {
-      resultString += 'ы';
-    }
-    resultString += ': ';
-    Authors.forEach(author => {
-      resultString += author.Name + ', ';
-    });
-    return resultString.substring(0, resultString.length - 2);
+    let resultString = Authors.length > 1 ? 'Авторы: ' : 'Автор: ';
+    let authorsNames = Authors.map(author => author.Name);
+    resultString += authorsNames.join(', ');
+
+    return resultString;
   }
 
   render() {

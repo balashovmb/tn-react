@@ -42,7 +42,7 @@ const book = {
   Cover: 'https://cdn1.ozone.ru/multimedia/1037901712.jpg',
   Authors: [author, author2, author3, author4],
   MinimalPrice: 500,
-  ExpectedProice: 1000,
+  ExpectedPrice: 1000,
   Amount: 400000,
   ExpectedAmount: 1500000,
   Subscribers: 400
