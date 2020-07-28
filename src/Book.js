@@ -7,8 +7,7 @@ class Book extends React.Component {
     if (!Authors || Authors.length === 0) { return 'Автор не указан.' };
 
     let resultString = Authors.length > 1 ? 'Авторы: ' : 'Автор: ';
-    let authorsNames = Authors.map(author => author.Name);
-    resultString += authorsNames.join(', ');
+    resultString += Authors.map(author => author.Name).join(', ');
 
     return resultString;
   }
