@@ -1,10 +1,7 @@
 import React from 'react';
+import AuthorsAvatar from './AuthorsAvatar';
 
 class AboutAuthor extends React.Component {
-  altText(Avatar, Name) {
-    return Avatar ? Name : 'Фото отсутствует.'
-  }
-
   render() {
     if (!this.props.author) {
       return <div>Информация об авторе отсутствует.</div>
@@ -15,9 +12,7 @@ class AboutAuthor extends React.Component {
 
     return (
       <div style={styles.container}>
-        <div style={styles.imageBox}>
-          <img style={styles.image} src={Avatar} alt={this.altText(Avatar, Name)}></img>
-        </div>
+        <AuthorsAvatar avatar={Avatar} name={Name} />
         <div style={styles.textContainer}>
           <div>{Name}</div>
           <div>{Email}</div>
@@ -31,12 +26,6 @@ class AboutAuthor extends React.Component {
 const styles = {
   container: {
     display: 'flex'
-  },
-  imageBox: {
-    maxWidth: '100px'
-  },
-  image: {
-    width: '100%'
   },
   textContainer: {
     flex: '1'

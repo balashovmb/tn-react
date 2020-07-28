@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthorsList from './AuthorsList';
 import SubscriptionTerms from './SubscribtionTerms';
+import BookCover from './BookCover';
 
 class Book extends React.Component {
   authors(Authors) {
@@ -36,9 +37,7 @@ class Book extends React.Component {
     return (
       <div>
         <div style={styles.bookContainer}>
-          <div style={styles.imageBox}>
-            <img style={styles.image} src={Cover} alt={Title}></img>
-          </div>
+          <BookCover cover={Cover} title={Title}/>
           <div style={styles.textContainer}>
             <div>{Title} {(Subscribers > 300) && <span style={styles.tagHot}>*HOT!*</span>}</div>
             <div>{this.authors(Authors)}</div>
@@ -63,12 +62,6 @@ class Book extends React.Component {
 const styles = {
   bookContainer: {
     display: 'flex'
-  },
-  imageBox: {
-    maxWidth: '400px'
-  },
-  image: {
-    width: '100%'
   },
   textContainer: {
     flex: '1',
