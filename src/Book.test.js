@@ -4,42 +4,29 @@ import '@testing-library/jest-dom/extend-expect';
 
 import Book from './Book';
 
+import { book, bookWithoutAuthors } from './data';
+
 test('renders information about the book', () => {
-  const author = {
-    Name: 'Стив Макконнелл',
-    Info: 'Признанный авторитет и известнейший автор в сообществе разработчиков. Он занимает должность главного разработчика ПО в компании Construx Software.',
-    Email: 'steve@mcconnel.com',
-    Avatar: 'https://i.livelib.ru/auface/178436/o/b303/Stiv_Makkonnell.jpg',
-  }
-
-  const book = {
-    Title: 'Совершенный код.',
-    Annotation: 'Более 10 лет первое издание этой книги считалось одним из лучших практических руководств по программированию.',
-    Pages: 896,
-    Language: 'Английский',
-    Progress: 100,
-    Cover: 'https://cdn1.ozone.ru/multimedia/1020973362.jpg',
-    Author: author,
-    MinimalPrice: 500,
-    ExpectedPrice: 1000,
-    Amount: 400000,
-    ExpectedAmount: 1500000
-  }
-
   const { getByAltText, getByText } = render(<Book book={book} />)
-  expect(getByText('Более 10 лет первое издание этой книги считалось одним из лучших практических руководств по программированию.')).toBeInTheDocument();
-  expect(getByText('Автор: Стив Макконнелл')).toBeInTheDocument();
-  expect(getByText('Количество страниц: 896')).toBeInTheDocument();
+  expect(getByText('В предлагаемой книге описываются простые и изящные решения типичных задач, возникающих в объектно-ориентированном проектировании.')).toBeInTheDocument();
+  expect(getByText('Авторы: Эрих Гамма, Ричард Хелм, Ральф Джонсон, Джон Влисидис')).toBeInTheDocument();
+  expect(getByText('Количество страниц: 366')).toBeInTheDocument();
   expect(getByText('Язык: Английский')).toBeInTheDocument();
   expect(getByText('Процент прогресса: 100')).toBeInTheDocument();
   expect(getByText('Минимальная цена: 500')).toBeInTheDocument();
   expect(getByText('Желаемая цена: 1000')).toBeInTheDocument();
   expect(getByText('Собранная сумма: 400000')).toBeInTheDocument();
   expect(getByText('Ожидаемая сумма: 1500000')).toBeInTheDocument();
-  expect(getByAltText('Совершенный код.').src).toBe(book.Cover);
+  expect(getByText('Подписчики: 400')).toBeInTheDocument();
+  expect(getByAltText('Приёмы объектно-ориентированного проектирования. Паттерны проектирования').src).toBe(book.Cover);
 })
 
 test('renders empty book info', () => {
   const { getByText } = render(<Book />);
   expect(getByText('Информация о книге отсутствует.')).toBeInTheDocument();
+})
+
+test('renders author not specified message', () => {
+  const { getByText } = render(<Book book={bookWithoutAuthors} />)
+  expect(getByText('Автор не указан.')).toBeInTheDocument();
 })

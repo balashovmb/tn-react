@@ -11,18 +11,20 @@ class AuthorsList extends React.Component {
     this.setState({ allAuthors: !this.state.allAuthors });
   }
 
+  authorsToRender(authors) {
+    return this.state.allAuthors ? authors : authors.slice(0, 3);
+  }
+
   render() {
     let { authors } = this.props;
 
-    const authorsLength = authors.length;
+    if (!authors || authors.length === 0) { return (<div>Информация об авторах отсутствует.</div>) }
 
-    if (!this.state.allAuthors) {
-      authors = authors.slice(0, 3);
-    }
+    const authorsLength = authors.length;
 
     return (
       <div>
-        {authors.map(author => (
+        {this.authorsToRender(authors).map(author => (
           <div key={author.id}>
             <AboutAuthor author={author} />
           </div>
