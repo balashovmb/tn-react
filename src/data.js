@@ -59,4 +59,11 @@ const bookWithoutAuthors = {
   Subscribers: 400
 }
 
-export { author, author2, author3, author4, book, bookWithoutAuthors };
+const user = {
+  email: 'stepan@ivanov.org',
+  firstName: 'Stepan',
+  lastName: 'Ivanov',
+  avatarUrl: 'https://imageproxy.ifunny.co/noop/user_photos/be199eb6d91c6160b18c91d3189f33a8a581a96b_0.jpg'
+}
+
+export { author, author2, author3, author4, book, bookWithoutAuthors, user };

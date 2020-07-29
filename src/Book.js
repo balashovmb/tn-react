@@ -1,7 +1,9 @@
 import React from 'react';
+
 import AuthorsList from './AuthorsList';
 import SubscriptionTerms from './SubscribtionTerms';
 import BookCover from './BookCover';
+import QuestionForm from './QuestionForm';
 
 class Book extends React.Component {
   authors(Authors) {
@@ -37,7 +39,7 @@ class Book extends React.Component {
     return (
       <div>
         <div style={styles.bookContainer}>
-          <BookCover cover={Cover} title={Title}/>
+          <BookCover cover={Cover} title={Title} />
           <div style={styles.textContainer}>
             <div>{Title} {(Subscribers > 300) && <span style={styles.tagHot}>*HOT!*</span>}</div>
             <div>{this.authors(Authors)}</div>
@@ -54,6 +56,7 @@ class Book extends React.Component {
           </div>
         </div>
         <AuthorsList authors={Authors} />
+        <QuestionForm />
       </div>
     )
   }
