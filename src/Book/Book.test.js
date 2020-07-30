@@ -2,9 +2,9 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import Book from './Book';
+import Book from '../Book/Book';
 
-import { book, bookWithoutAuthors } from './data';
+import { book, bookWithoutAuthors } from '../common/data';
 
 test('renders information about the book', () => {
   const { getByAltText, getByText } = render(<Book book={book} />)

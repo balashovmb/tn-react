@@ -1,34 +1,20 @@
 import React from 'react';
 
-import Book from './Book';
+import Book from './Book/Book';
+import Header from './common/Header'
+import Footer from './common/Footer';
 
 class App extends React.Component {
   render() {
     return (
       <>
-        <header style={styles.header}>Bookstarter</header>
+        <Header />
         <h3>Подписаться на книгу</h3>
         <Book book={this.props.book} />
-        <footer style={styles.footer}>&copy; {new Date().getFullYear()}, Mikhail Balashov </footer>
+        <Footer />
       </>
     )
   }
 }
 
 export default App;
-
-const styles = {
-  header: {
-    backgroundColor: '#22222222',
-    minHeight: '50px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1.2rem',
-    fontWeight: 'bold'
-  },
-  footer: {
-    padding: '0 10%',
-    marginTop: '50px'
-  }
-}

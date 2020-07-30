@@ -3,7 +3,7 @@ const author = {
   Name: 'Эрих Гамма',
   Info: 'Программист из Швейцарии, один из четырёх авторов классической книги Design Patterns о шаблонах проектирования.',
   Email: 'Erich@Gamma.com',
-  Avatar: 'https://www.azquotes.com/public/pictures/authors/ab/73/ab734892e4c516e12dbe75f8979b1b5d/548f7cc0c428d_erich_gamma.jpg',
+  AvatarUrl: 'https://www.azquotes.com/public/pictures/authors/ab/73/ab734892e4c516e12dbe75f8979b1b5d/548f7cc0c428d_erich_gamma.jpg',
 }
 
 const author2 = {
@@ -11,7 +11,7 @@ const author2 = {
   Name: 'Ричард Хелм',
   Info: 'Учёный, один из четырех авторов классической книги «Design Patterns» о шаблонах проектирования программного обеспечения.',
   Email: 'Richard@Helm.com',
-  Avatar: 'https://im0-tub-ru.yandex.net/i?id=b2f47ba9891c6d1cc0a193c493ca0ae8&n=13&exp=1',
+  AvatarUrl: 'https://im0-tub-ru.yandex.net/i?id=b2f47ba9891c6d1cc0a193c493ca0ae8&n=13&exp=1',
 }
 
 const author3 = {
@@ -19,7 +19,7 @@ const author3 = {
   Name: 'Ральф Джонсон',
   Info: 'Один из четырёх авторов классической книги Design Patterns о шаблонах проектирования.',
   Email: 'Ralph@Johnson.com',
-  Avatar: 'http://photos.geni.com/p2/9762/9654/45ae7deef8881ab9/was46heq_large.jpg',
+  AvatarUrl: 'http://photos.geni.com/p2/9762/9654/45ae7deef8881ab9/was46heq_large.jpg',
 }
 
 const author4 = {
@@ -59,4 +59,11 @@ const bookWithoutAuthors = {
   Subscribers: 400
 }
 
-export { author, author2, author3, author4, book, bookWithoutAuthors };
+const user = {
+  email: 'stepan@ivanov.org',
+  firstName: 'Stepan',
+  lastName: 'Ivanov',
+  avatarUrl: 'https://imageproxy.ifunny.co/noop/user_photos/be199eb6d91c6160b18c91d3189f33a8a581a96b_0.jpg'
+}
+
+export { author, author2, author3, author4, book, bookWithoutAuthors, user };
