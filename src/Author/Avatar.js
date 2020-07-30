@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AuthorsAvatar extends React.Component {
+class Avatar extends React.Component {
   altText(avatar, name) {
     return avatar ? name : 'Фото отсутствует.'
   }
@@ -24,4 +24,4 @@ const styles = {
   }
 }
 
-export default AuthorsAvatar;
+export default Avatar;

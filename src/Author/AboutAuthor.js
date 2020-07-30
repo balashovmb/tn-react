@@ -1,5 +1,5 @@
 import React from 'react';
-import AuthorsAvatar from './AuthorsAvatar';
+import Avatar from './Avatar';
 
 class AboutAuthor extends React.Component {
   render() {
@@ -7,12 +7,12 @@ class AboutAuthor extends React.Component {
       return <div>Информация об авторе отсутствует.</div>
     }
     const {
-      author: { Name, Email, Info, Avatar }
+      author: { Name, Email, Info, AvatarUrl }
     } = this.props
 
     return (
       <div style={styles.container}>
-        <AuthorsAvatar avatar={Avatar} name={Name} />
+        <Avatar avatar={AvatarUrl} name={Name} />
         <div style={styles.textContainer}>
           <div>{Name}</div>
           <div>{Email}</div>

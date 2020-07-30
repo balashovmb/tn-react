@@ -8,9 +8,12 @@ class UserInfo extends React.Component {
         {
           user => (<div style={styles.user}>
             <div style={styles.container}>
-              <div style={styles.imageBox}>
-                <img style={styles.image} src={user.avatarUrl} alt={`user.firstName user.lastName`}></img>
-              </div>
+              {user.avatarUrl && (
+                  <div style={styles.imageBox}>
+                    <img style={styles.image} src={user.avatarUrl} alt={`user.firstName user.lastName`}></img>
+                  </div>
+                )
+              }
               <div style={styles.textContainer}>
                 <div>{user.firstName}</div>
                 <div >{user.lastName}</div>

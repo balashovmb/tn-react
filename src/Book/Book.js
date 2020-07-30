@@ -1,20 +1,12 @@
 import React from 'react';
 
-import AuthorsList from './AuthorsList';
+import AuthorsList from '../Author/AuthorsList';
 import SubscriptionTerms from './SubscribtionTerms';
 import BookCover from './BookCover';
 import QuestionForm from './QuestionForm';
+import AuthorsString from '../Author/AuthorsString';
 
 class Book extends React.Component {
-  authors(Authors) {
-    if (!Authors || Authors.length === 0) { return 'Автор не указан.' };
-
-    let resultString = Authors.length > 1 ? 'Авторы: ' : 'Автор: ';
-    resultString += Authors.map(author => author.Name).join(', ');
-
-    return resultString;
-  }
-
   render() {
     if (!this.props.book) {
       return <div>Информация о книге отсутствует.</div>
@@ -42,7 +34,7 @@ class Book extends React.Component {
           <BookCover cover={Cover} title={Title} />
           <div style={styles.textContainer}>
             <div>{Title} {(Subscribers > 300) && <span style={styles.tagHot}>*HOT!*</span>}</div>
-            <div>{this.authors(Authors)}</div>
+            <AuthorsString authors={Authors}/>
             <div>{Annotation}</div>
             <div>Количество страниц: {Pages}</div>
             <div>Язык: {Language}</div>

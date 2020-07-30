@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Book from './Book';
-import Header from './Header'
-import Footer from './Footer';
+import Book from './Book/Book';
+import Header from './common/Header'
+import Footer from './common/Footer';
 
 class App extends React.Component {
   render() {

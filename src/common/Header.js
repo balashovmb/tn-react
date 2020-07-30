@@ -1,5 +1,5 @@
 import React from 'react';
-import UserInfo from './UserInfo';
+import UserInfo from '../User/UserInfo';
 
 class Header extends React.Component {
   render() {

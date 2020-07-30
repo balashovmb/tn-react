@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import App from './App';
-import UserContext from './UserContext';
+import UserContext from './User/UserContext';
 
-import { book, user } from './data';
+import { book, user } from './common/data';
 
 ReactDOM.render(
   <UserContext.Provider value={user}>
