@@ -1,19 +1,16 @@
 import React from 'react';
 
+const authorsString = (Authors) => {
+  if (!Authors || Authors.length === 0) { return 'Автор не указан.' };
 
-class AuthorsString extends React.Component {
-  authorsString(Authors) {
-    if (!Authors || Authors.length === 0) { return 'Автор не указан.' };
-  
-    let resultString = Authors.length > 1 ? 'Авторы: ' : 'Автор: ';
-    resultString += Authors.map(author => author.Name).join(', ');
-  
-    return resultString;
-  }
-  render(){
-    const {authors} = this.props;
-    return   <div>{this.authorsString(authors)}</div>
-  }
+  let resultString = Authors.length > 1 ? 'Авторы: ' : 'Автор: ';
+  resultString += Authors.map(author => author.Name).join(', ');
+
+  return resultString;
+}
+
+const AuthorsString = ({ authors }) => {
+  return <div>{authorsString(authors)}</div>
 }
 
 export default AuthorsString;
