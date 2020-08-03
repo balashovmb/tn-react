@@ -1,17 +1,15 @@
 import React from 'react';
 import UserInfo from '../User/UserInfo';
 
-class Header extends React.Component {
-  render() {
-    return (
-      <header style={styles.header}>
-        <span style={styles.textHeader}>
-          Bookstarter
+const Header = () => {
+  return (
+    <header style={styles.header}>
+      <span style={styles.textHeader}>
+        Bookstarter
         </span>
-        <UserInfo />
-      </header>
-    )
-  }
+      <UserInfo />
+    </header>
+  )
 }
 
 export default Header;

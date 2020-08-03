@@ -1,11 +1,9 @@
 import React from 'react';
 
-class Footer extends React.Component {
-  render() {
-    return (
-      <footer style={styles.footer}>&copy; {new Date().getFullYear()}, Mikhail Balashov </footer>
-    )
-  }
+const Footer = () => {
+  return (
+    <footer style={styles.footer}>&copy; {new Date().getFullYear()}, Mikhail Balashov </footer>
+  )
 }
 
 export default Footer;

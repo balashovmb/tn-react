@@ -25,7 +25,7 @@ class AuthorsList extends React.Component {
     return (
       <div>
         {this.authorsToRender(authors).map(author => (
-          <div key={author.id}>
+          <div key={author.Id}>
             <AboutAuthor author={author} />
           </div>
         ))}

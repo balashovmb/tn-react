@@ -1,18 +1,11 @@
 import React from 'react';
 
-class Avatar extends React.Component {
-  altText(avatar, name) {
-    return avatar ? name : 'Фото отсутствует.'
-  }
-
-  render() {
-    const { avatar, name } = this.props;
-    return (
-      <div style={styles.imageBox}>
-        <img style={styles.image} src={avatar} alt={this.altText(avatar, name)}></img>
-      </div>
-    )
-  }
+const Avatar = ({ avatar, name }) => {
+  return (
+    <div style={styles.imageBox}>
+      <img style={styles.image} src={avatar} alt={avatar ? name : 'Фото отсутствует.'}></img>
+    </div>
+  )
 }
 
 const styles = {
