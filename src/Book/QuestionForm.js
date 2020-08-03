@@ -13,10 +13,10 @@ const QuestionForm = () => {
   return (
     <form onSubmit={handleSubmit} style={styles.form}>
       <legend>Задать вопрос автору</legend>
-      <p><label htmlFor='name'>Имя </label><input type="text" id="name"></input></p>
-      <p><label htmlFor='email'>E-mail </label><input type="email" id="email"></input></p>
+      <p><label htmlFor='name'>Имя </label><input type="text" id="name"/></p>
+      <p><label htmlFor='email'>E-mail </label><input type="email" id="email"/></p>
       <p><label htmlFor='question'>Вопрос</label></p>
-      <p><textarea id="question" style={styles.textArea}></textarea></p>
+      <p><textarea id="question" style={styles.textArea}/></p>
       <p><button type="submit">Отправить</button></p>
     </form>
   )
