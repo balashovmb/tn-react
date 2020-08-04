@@ -7,7 +7,7 @@ import QuestionForm from './QuestionForm';
 import AuthorsString from '../Author/AuthorsString';
 import { booksList } from '../common/data';
 import SimilarBooks from './SimilarBooks';
-import PriceInput from './PriceInput';
+import PriceInputContainer from './PriceInputContainer';
 
 const Book = (props) => {
   if (!props.book) {
@@ -46,7 +46,7 @@ const Book = (props) => {
           <div>Собранная сумма: {Amount}</div>
           <div>Ожидаемая сумма: {ExpectedAmount}</div>
           <div>Подписчики: {Subscribers}</div>
-          <PriceInput minimalPrice={MinimalPrice} />
+          <PriceInputContainer minimalPrice={MinimalPrice} />
           <SubscriptionTerms />
         </div>
       </div>
