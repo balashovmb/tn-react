@@ -4,7 +4,7 @@ const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
   const {
     Cover,
     Title,
-    Author: { Name }
+    Authors
   } = book;
 
   return (
@@ -14,7 +14,7 @@ const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
       </div>
       <div style={styles.textContainer}>
         <div>{Title}</div>
-        <div>{Name}</div>
+        <div>{Authors}</div>
         <button onClick={() => removeFromSimilarBook(book.Id)}>Убрать</button>
       </div>
     </div>

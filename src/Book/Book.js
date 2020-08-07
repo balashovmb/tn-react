@@ -26,7 +26,8 @@ const Book = (props) => {
       ExpectedPrice,
       Amount,
       ExpectedAmount,
-      Subscribers
+      Subscribers,
+      SimilarBooksIds
     }
   } = props;
 
@@ -52,7 +53,7 @@ const Book = (props) => {
       </div>
       <AuthorsList authors={Authors} />
       <QuestionForm />
-      <SimilarBooks books={booksList} />
+      <SimilarBooks bookIds={SimilarBooksIds} />
     </div>
   )
 }

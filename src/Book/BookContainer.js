@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import Book from './Book';
 
-const API_TOKEN = 'keyYoatUKcvLsVwMT';
+import {API_TOKEN} from '../common/data';
 
 const httpClient = axios.create({
   baseURL: 'https://api.airtable.com/v0/appDH1YfToGXZokH7',
@@ -11,22 +11,18 @@ const httpClient = axios.create({
   headers: {
     'Authorization': `Bearer ${API_TOKEN}`
   }
-
 })
 
 class BookContainer extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       record: null
     }
   }
 
   componentDidMount() {
-    console.log('mount')
     this._fetchData();
-
   }
 
   render() {
@@ -35,7 +31,6 @@ class BookContainer extends React.Component {
       record ?
         <Book book={record} />
         : <div>Идет загрузка...</div>
-
     );
   }
   _fetchData() {
@@ -59,7 +54,7 @@ class BookContainer extends React.Component {
           Info: record.fields['Info (from Authors)'][i],
           Email: record.fields['Email (from Authors)'][i],
           AvatarUrl: record.fields['AvatarUrl (from Authors)'][i]
-        }   
+        }
       )
     }
     return ({
@@ -74,9 +69,9 @@ class BookContainer extends React.Component {
       Amount: record.fields.Amount,
       ExpectedAmount: record.fields.ExpectedAmount,
       Subscribers: record.fields.Subscribers,
-      Authors: authors
-    }
-    )
+      Authors: authors,
+      SimilarBooksIds: record.fields.SimilarBooks
+    })
   }
 }
 

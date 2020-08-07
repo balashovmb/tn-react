@@ -123,6 +123,8 @@ const book5 = {
   Cover: 'https://cdncv1.litres.ru/pub/c/pdf-kniga/cover_415/22805990-m-hartl-ruby-on-rails-dlya-nachinauschih-izuchaem-razrabotku-veb-prilozheniy-na-osnove-rails-22805990.jpg'
 }
 
+const API_TOKEN = 'keyYoatUKcvLsVwMT';
+
 const booksList = [book2, book3, book4, book5];
 
-export { author, author2, author3, author4, book, bookWithoutAuthors, user, booksList };
+export { author, author2, author3, author4, book, bookWithoutAuthors, user, booksList, API_TOKEN };
