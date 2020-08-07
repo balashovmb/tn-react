@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Book from './Book/Book';
+import BookContainer from './Book/BookContainer';
 import Header from './common/Header'
 import Footer from './common/Footer';
 
@@ -10,7 +10,7 @@ class App extends React.Component {
       <>
         <Header />
         <h3>Подписаться на книгу</h3>
-        <Book book={this.props.book} />
+        <BookContainer />
         <Footer />
       </>
     )
