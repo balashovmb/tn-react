@@ -22,7 +22,7 @@ class PriceInputContainer extends React.PureComponent {
     return (
       <div style={styles.container}>
         {(price < minimalPrice && price !== '') && <div style={styles.message}>Взнос не может быть меньше минимальной цены</div>}
-        <PriceInput price={price} minimalPrice={minimalPrice} label='Взнос' commission={0} setPrice={this.setPrice} />
+        <PriceInput price={price} minimalPrice={minimalPrice} label='Взнос' commission={0} setPrice={this.setPrice} focus />
         <PriceInput price={price} minimalPrice={minimalPrice} label='Доход автора' commission={0.1} setPrice={this.setPrice} />
       </div>
     )
