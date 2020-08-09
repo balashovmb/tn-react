@@ -37,21 +37,23 @@ class SimilarBooks extends React.PureComponent {
     }, 1000);
   }
 
-  bookIdsToShow() {
+  _bookIdsToShow() {
     const numberOfBooks = 3 - this.state.booksToShow.length;
     const existedBookIds = this.state.booksToShow.map(book => book.Id);
     const bookIdsToExclude = [...existedBookIds, ...this.state.hiddenBookIds];
+
     return this.props.bookIds.filter(bookId => !(bookIdsToExclude.includes(bookId))).slice(0, numberOfBooks);
   }
 
   _fetchData() {
-    this.bookIdsToShow().forEach(bookId =>
+    this._bookIdsToShow().forEach(bookId =>
       httpClient.get(`/Books/${bookId}`)
         .then(result => result.data)
         .then(this._mapFromAirtable)
         .then(record => this.setState({ booksToShow: [...this.state.booksToShow, record] }))
     )
   }
+
   _mapFromAirtable(record) {
     const authors = record.fields['Name (from Authors)'].join(', ');
 
@@ -72,6 +74,7 @@ class SimilarBooks extends React.PureComponent {
 
   render() {
     const { booksToShow } = this.state;
+
     return (
       <div>
         <div>Похожие книги:</div>
