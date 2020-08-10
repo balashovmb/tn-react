@@ -7,7 +7,7 @@ import { API_TOKEN } from '../common/data';
 
 const httpClient = axios.create({
   baseURL: 'https://api.airtable.com/v0/appDH1YfToGXZokH7',
-  timeout: 1000,
+  timeout: 2000,
   headers: {
     'Authorization': `Bearer ${API_TOKEN}`
   }
@@ -29,12 +29,10 @@ class SimilarBooks extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    setTimeout(() => {
-      if (this.state.booksToShow.length < 3
-        && this.props.bookIds.length >= this.state.hiddenBookIds.length + 3) {
-        this._fetchData();
-      }
-    }, 1000);
+    if (this.state.booksToShow.length < 3
+      && this.props.bookIds.length >= this.state.hiddenBookIds.length + 3) {
+      this._fetchData();
+    }
   }
 
   _bookIdsToShow() {
@@ -46,23 +44,23 @@ class SimilarBooks extends React.PureComponent {
   }
 
   _fetchData() {
-    this._bookIdsToShow().forEach(bookId =>
-      httpClient.get(`/Books/${bookId}`)
-        .then(result => result.data)
-        .then(this._mapFromAirtable)
-        .then(record => this.setState({ booksToShow: [...this.state.booksToShow, record] }))
-    )
+    Promise.all(this._bookIdsToShow().map(bookId =>
+      httpClient.get(`/Books/${bookId}`)))
+      .then(this._mapFromAirtable)
+      .then(records => this.setState({ booksToShow: [...this.state.booksToShow, ...records] }))
   }
 
-  _mapFromAirtable(record) {
-    const authors = record.fields['Name (from Authors)'].join(', ');
+  _mapFromAirtable(records) {
+    return (records.map(record => {
+      const authors = record.data.fields['Name (from Authors)'].join(', ');
 
-    return ({
-      Title: record.fields.Title,
-      Cover: record.fields.Cover,
-      Authors: authors,
-      Id: record.id
-    })
+      return ({
+        Title: record.data.fields.Title,
+        Cover: record.data.fields.Cover,
+        Authors: authors,
+        Id: record.data.id
+      })
+    }))
   }
 
   removeFromSimilarBook(currentBookId) {
