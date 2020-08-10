@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 
 import Book from './Book';
 
@@ -45,18 +46,17 @@ class BookContainer extends React.Component {
       .then(record => this.setState({ record }));
   }
   _mapFromAirtable(record) {
-    let authors = [];
-    for (let i = 0; i < record.fields.Authors.length; i++) {
-      authors.push(
-        {
-          Id: record.fields.Authors[i],
-          Name: record.fields['Name (from Authors)'][i],
-          Info: record.fields['Info (from Authors)'][i],
-          Email: record.fields['Email (from Authors)'][i],
-          AvatarUrl: record.fields['AvatarUrl (from Authors)'][i]
-        }
-      )
-    }
+    const authors = _.zip(
+        record.fields.Authors,
+        record.fields["Name (from Authors)"],
+        record.fields["Info (from Authors)"],
+        record.fields["AvatarUrl (from Authors)"],
+        record.fields["Email (from Authors)"]
+      ).map(record => _.zipObject(
+        ['Id', 'Name', 'Info', 'AvatarUrl', 'Email'],
+        record
+      ))
+
     return ({
       Title: record.fields.Title,
       Annotation: record.fields.Annotation,
