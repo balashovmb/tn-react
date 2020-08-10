@@ -7,7 +7,7 @@ import { book, user } from './common/data';
 
 ReactDOM.render(
   <UserContext.Provider value={user}>
-    <App book={book} />
+    <App/>
   </UserContext.Provider>,
   document.getElementById('root')
 );
