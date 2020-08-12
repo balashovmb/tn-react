@@ -7,9 +7,9 @@ import QuestionForm from './QuestionForm';
 import AuthorsString from '../Author/AuthorsString';
 import SimilarBooks from './SimilarBooks';
 import PriceInputContainer from './PriceInputContainer';
-
 import withLoader from '../HOC/withLoader';
 import SimilarBooksContainer from './SimilarBooksContainer';
+import withBooks from '../HOC/withBooks';
 
 const Book = (props) => {
   if (!props.book) {

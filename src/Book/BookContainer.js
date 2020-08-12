@@ -1,60 +1,23 @@
 import React from 'react';
-import axios from 'axios';
 import _ from 'lodash';
 
 import Book from './Book';
-
-import {API_TOKEN} from '../common/data';
-
-const httpClient = axios.create({
-  baseURL: 'https://api.airtable.com/v0/appDH1YfToGXZokH7',
-  timeout: 2000,
-  headers: {
-    'Authorization': `Bearer ${API_TOKEN}`
-  }
-})
+import withBooks from '../HOC/withBooks';
+import withLoader from '../HOC/withLoader';
 
 class BookContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      record: null
-    }
-  }
-
-  componentDidMount() {
-    this._fetchData();
-  }
-
-  render() {
-    const { record } = this.state;
-    return (
-      <Book isLoading={!record} book={record} />
-    );
-  }
-  _fetchData() {
-    httpClient.get('/Books', {
-      params: {
-        maxRecords: 1,
-        view: 'Grid view'
-      }
-    })
-      .then(result => result.data.records[0])
-      .then(this._mapFromAirtable)
-      .then(record => this.setState({ record }));
-  }
-  _mapFromAirtable(record) {
+  _mapFromAirtable(records) {
+    const record = records[0].data;
     const authors = _.zip(
-        record.fields.Authors,
-        record.fields["Name (from Authors)"],
-        record.fields["Info (from Authors)"],
-        record.fields["AvatarUrl (from Authors)"],
-        record.fields["Email (from Authors)"]
-      ).map(record => _.zipObject(
-        ['Id', 'Name', 'Info', 'AvatarUrl', 'Email'],
-        record
-      ))
-
+      record.fields.Authors,
+      record.fields["Name (from Authors)"],
+      record.fields["Info (from Authors)"],
+      record.fields["AvatarUrl (from Authors)"],
+      record.fields["Email (from Authors)"]
+    ).map(record => _.zipObject(
+      ['Id', 'Name', 'Info', 'AvatarUrl', 'Email'],
+      record
+    ))
     return ({
       Title: record.fields.Title,
       Annotation: record.fields.Annotation,
@@ -71,6 +34,13 @@ class BookContainer extends React.Component {
       SimilarBooksIds: record.fields.SimilarBooks
     })
   }
+
+  render() {
+    const book = this._mapFromAirtable(this.props.bookRecords)
+    return (
+      <Book book={book} />
+    )
+  }
 }
 
-export default BookContainer;
+export default withBooks(withLoader(BookContainer));
