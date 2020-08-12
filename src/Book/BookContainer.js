@@ -29,9 +29,7 @@ class BookContainer extends React.Component {
   render() {
     const { record } = this.state;
     return (
-      record ?
-        <Book book={record} />
-        : <div>Идет загрузка...</div>
+      <Book isLoading={!record} book={record} />
     );
   }
   _fetchData() {

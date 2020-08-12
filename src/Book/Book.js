@@ -9,6 +9,8 @@ import { booksList } from '../common/data';
 import SimilarBooks from './SimilarBooks';
 import PriceInputContainer from './PriceInputContainer';
 
+import withLoader from '../HOC/withLoader';
+
 const Book = (props) => {
   if (!props.book) {
     return <div>Информация о книге отсутствует.</div>
@@ -71,4 +73,4 @@ const styles = {
   }
 }
 
-export default Book;
+export default withLoader(Book);
