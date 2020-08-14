@@ -73,4 +73,4 @@ const styles = {
   }
 }
 
-export default withLoader(Book);
+export default Book;
