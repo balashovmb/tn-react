@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import axios from 'axios';
 
 import SimilarBooks from './SimilarBooks';
+import useBooks from '../hooks/useBooks';
 
 import { API_TOKEN } from '../common/data';
 
@@ -13,70 +14,64 @@ const httpClient = axios.create({
   }
 })
 
-class SimilarBooksContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const _mapFromAirtable = (records) => {
+  if (!records) return null;
+  return (records.map(record => {
+    const authors = record.data.fields['Name (from Authors)'].join(', ');
 
-    this.state = {
-      booksToShow: [],
-      hiddenBookIds: []
-    };
-    this.removeFromSimilarBook = this.removeFromSimilarBook.bind(this);
+    return ({
+      Title: record.data.fields.Title,
+      Cover: record.data.fields.Cover,
+      Authors: authors,
+      Id: record.data.id
+    })
+  }))
+}
+
+const SimilarBooksContainer = (props) => {
+  const [booksToShow, setBooksToShow] = useState([]);
+  const [hiddenBookIds, sethiddenBookIds] = useState([]);
+
+
+  // componentDidMount() {
+  //   this._fetchData();
+  // }
+
+  // componentDidUpdate() {
+  //   if (this.state.booksToShow.length < 3
+  //     && this.props.bookIds.length >= this.state.hiddenBookIds.length + 3) {
+  //     this._fetchData();
+  //   }
+  // }
+
+  const _bookIdsToShow = () => {
+    const numberOfBooks = 3 - booksToShow.length;
+    const existedBookIds = booksToShow.map(book => book.Id);
+    const bookIdsToExclude = [...existedBookIds, ...hiddenBookIds];
+
+    return props.bookIds.filter(bookId => !(bookIdsToExclude.includes(bookId))).slice(0, numberOfBooks);
   }
 
-  componentDidMount() {
-    this._fetchData();
-  }
-
-  componentDidUpdate() {
-    if (this.state.booksToShow.length < 3
-      && this.props.bookIds.length >= this.state.hiddenBookIds.length + 3) {
-      this._fetchData();
+  // useEffect(() => {
+    if (booksToShow.length < 3
+      && props.bookIds.length >= hiddenBookIds.length + 3) {
+      const bookRecords = useBooks(_bookIdsToShow());
+      setBooksToShow(bookRecords);
     }
-  }
+  // })
 
-  _bookIdsToShow() {
-    const numberOfBooks = 3 - this.state.booksToShow.length;
-    const existedBookIds = this.state.booksToShow.map(book => book.Id);
-    const bookIdsToExclude = [...existedBookIds, ...this.state.hiddenBookIds];
 
-    return this.props.bookIds.filter(bookId => !(bookIdsToExclude.includes(bookId))).slice(0, numberOfBooks);
-  }
-
-  _fetchData() {
-    Promise.all(this._bookIdsToShow().map(bookId =>
-      httpClient.get(`/Books/${bookId}`)))
-      .then(this._mapFromAirtable)
-      .then(records => this.setState({ booksToShow: [...this.state.booksToShow, ...records] }))
-  }
-
-  _mapFromAirtable(records) {
-    return (records.map(record => {
-      const authors = record.data.fields['Name (from Authors)'].join(', ');
-
-      return ({
-        Title: record.data.fields.Title,
-        Cover: record.data.fields.Cover,
-        Authors: authors,
-        Id: record.data.id
-      })
-    }))
-  }
-
-  removeFromSimilarBook(currentBookId) {
+  const removeFromSimilarBook = (currentBookId) => {
     this.setState((state) => ({
       booksToShow: this.state.booksToShow.filter(book => book.Id != currentBookId),
       hiddenBookIds: [...this.state.hiddenBookIds, currentBookId]
     }))
   }
-
-  render() {
-    const { booksToShow } = this.state;
-
-    return (
-      <SimilarBooks booksToShow={booksToShow} removeFromSimilarBook={this.removeFromSimilarBook} isLoading={booksToShow.length === 0} />
-    )
-  }
+  // const bookRecords = useBooks(_bookIdsToShow());
+  // if(bookRecords){ setBooksToShow(bookRecords)};
+  return (
+    <SimilarBooks booksToShow={booksToShow} removeFromSimilarBook={removeFromSimilarBook} isLoading={booksToShow.length === 0} />
+  )
 }
 
 export default SimilarBooksContainer;
