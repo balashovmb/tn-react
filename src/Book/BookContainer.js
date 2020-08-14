@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import _ from 'lodash';
 
 import Book from './Book';
-import withBooks from '../HOC/withBooks';
-import withLoader from '../HOC/withLoader';
+import useBooks from '../hooks/useBooks';
 
 function _mapFromAirtable(records) {
+  if (!records) return null;
   const record = records[0].data;
   const authors = _.zip(
     record.fields.Authors,
@@ -34,12 +34,13 @@ function _mapFromAirtable(records) {
   })
 }
 
+const BookContainer = ({ bookIds }) => {
+  const bookRecord = useBooks(bookIds);
+  const book = _mapFromAirtable(bookRecord);
 
-const BookContainer =({bookRecords})=> {
-  const book = _mapFromAirtable(bookRecords);
   return (
-    <Book book={book} />
+    <Book isLoading={!book} book={book} />
   )
 }
 
-export default withBooks(withLoader(BookContainer));
+export default BookContainer;
