@@ -11,7 +11,7 @@ class App extends React.Component {
       <>
         <Header />
         <h3>Подписаться на книгу</h3>
-        <BookContainer />
+        <BookContainer bookIds={['recCSoQw7GacF3O5O']}/>
         <Footer />
         <ToTheTopButton/>
       </>

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import UserContext from './UserContext';
 
 const UserInfo = () => {
+  const user = useContext(UserContext);
   return (
-    <UserContext.Consumer>
+    <div style={styles.user}>
       {
-        user => (<div style={styles.user}>
-          {
-            (user.firstName || user.lastName) ? (
+        (user.firstName || user.lastName)
+          ? (
               <div style={styles.container}>
                 {user.avatarUrl && (
                   <div style={styles.imageBox}>
@@ -19,14 +19,11 @@ const UserInfo = () => {
                   <div>{user.firstName}</div>
                   <div>{user.lastName}</div>
                 </div>
-              </div>) :
-              <div>anonymous</div>
-          }
-
-        </div>
-        )
+              </div>
+            )
+          : <div>anonymous</div>
       }
-    </UserContext.Consumer>
+    </div>
   )
 }
 
