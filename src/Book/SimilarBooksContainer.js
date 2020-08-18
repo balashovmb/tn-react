@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import SimilarBooks from './SimilarBooks';
+import withBooks from '../HOC/withBooks';
 
 import { API_TOKEN } from '../common/data';
 
@@ -18,39 +19,18 @@ class SimilarBooksContainer extends React.PureComponent {
     super(props);
 
     this.state = {
-      booksToShow: [],
       hiddenBookIds: []
     };
     this.removeFromSimilarBook = this.removeFromSimilarBook.bind(this);
   }
 
-  componentDidMount() {
-    this._fetchData();
-  }
-
-  componentDidUpdate() {
-    if (this.state.booksToShow.length < 3
-      && this.props.bookIds.length >= this.state.hiddenBookIds.length + 3) {
-      this._fetchData();
-    }
-  }
-
-  _bookIdsToShow() {
-    const numberOfBooks = 3 - this.state.booksToShow.length;
-    const existedBookIds = this.state.booksToShow.map(book => book.Id);
-    const bookIdsToExclude = [...existedBookIds, ...this.state.hiddenBookIds];
-
-    return this.props.bookIds.filter(bookId => !(bookIdsToExclude.includes(bookId))).slice(0, numberOfBooks);
-  }
-
-  _fetchData() {
-    Promise.all(this._bookIdsToShow().map(bookId =>
-      httpClient.get(`/Books/${bookId}`)))
-      .then(this._mapFromAirtable)
-      .then(records => this.setState({ booksToShow: [...this.state.booksToShow, ...records] }))
+  _bookRecordsToShow(bookRecords) {
+    if (!bookRecords) return [];
+    return bookRecords.filter(br => !this.state.hiddenBookIds.includes(br.data.id)).slice(0, 3);
   }
 
   _mapFromAirtable(records) {
+    if (!records) return [];
     return (records.map(record => {
       const authors = record.data.fields['Name (from Authors)'].join(', ');
 
@@ -65,18 +45,18 @@ class SimilarBooksContainer extends React.PureComponent {
 
   removeFromSimilarBook(currentBookId) {
     this.setState((state) => ({
-      booksToShow: this.state.booksToShow.filter(book => book.Id != currentBookId),
       hiddenBookIds: [...this.state.hiddenBookIds, currentBookId]
     }))
   }
 
   render() {
-    const { booksToShow } = this.state;
-
+    const { bookRecords } = this.props;
+    const bookRecordsToShow = this._bookRecordsToShow(bookRecords);
+    const booksToShow = this._mapFromAirtable(bookRecordsToShow);
     return (
       <SimilarBooks booksToShow={booksToShow} removeFromSimilarBook={this.removeFromSimilarBook} isLoading={booksToShow.length === 0} />
     )
   }
 }
 
-export default SimilarBooksContainer;
+export default withBooks(SimilarBooksContainer);
