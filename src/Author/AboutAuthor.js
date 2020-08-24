@@ -3,12 +3,12 @@ import Avatar from './Avatar';
 
 const AboutAuthor = (props) => {
   if (!props.author) {
-    return <div>Информация об авторе отсутствует.</div>
+    return <div>Информация об авторе отсутствует.</div>;
   }
 
   const {
     author: { Name, Email, Info, AvatarUrl }
-  } = props
+  } = props;
 
   return (
     <div style={styles.container}>
@@ -19,8 +19,8 @@ const AboutAuthor = (props) => {
         <div>{Info}</div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const styles = {
   container: {
@@ -29,6 +29,6 @@ const styles = {
   textContainer: {
     flex: '1'
   }
-}
+};
 
 export default AboutAuthor;

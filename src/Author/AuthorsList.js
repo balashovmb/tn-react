@@ -8,7 +8,7 @@ class AuthorsList extends React.Component {
   }
 
   toggle() {
-    this.setState({ allAuthors: !this.state.allAuthors });
+    this.setState({ allAuthors: (prevState) => !prevState.allAuthors });
   }
 
   authorsToRender(authors) {
@@ -16,9 +16,9 @@ class AuthorsList extends React.Component {
   }
 
   render() {
-    let { authors } = this.props;
+    const { authors } = this.props;
 
-    if (!authors || authors.length === 0) { return (<div>Информация об авторах отсутствует.</div>) }
+    if (!authors || authors.length === 0) { return (<div>Информация об авторах отсутствует</div>); }
 
     const authorsLength = authors.length;
 
@@ -29,11 +29,10 @@ class AuthorsList extends React.Component {
             <AboutAuthor author={author} />
           </div>
         ))}
-        {((authorsLength > 3) && (!this.state.allAuthors)) &&
-          <a onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </a>
-        }
+        {((authorsLength > 3) && (!this.state.allAuthors))
+          && <button onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </button>}
       </div>
-    )
+    );
   }
 }
 

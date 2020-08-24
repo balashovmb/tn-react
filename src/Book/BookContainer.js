@@ -1,26 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import _ from 'lodash';
+import { render } from '@testing-library/react';
 
 import Book from './Book';
 import withBooks from '../HOC/withBooks';
-import { render } from '@testing-library/react';
 import withLoader from '../HOC/withLoader';
 
 class BookContainer extends React.PureComponent {
-
   _mapFromAirtable(records) {
     if (!records) return null;
     const record = records[0].data;
     const authors = _.zip(
       record.fields.Authors,
-      record.fields["Name (from Authors)"],
-      record.fields["Info (from Authors)"],
-      record.fields["AvatarUrl (from Authors)"],
-      record.fields["Email (from Authors)"]
+      record.fields['Name (from Authors)'],
+      record.fields['Info (from Authors)'],
+      record.fields['AvatarUrl (from Authors)'],
+      record.fields['Email (from Authors)']
     ).map(record => _.zipObject(
       ['Id', 'Name', 'Info', 'AvatarUrl', 'Email'],
       record
-    ))
+    ));
     return ({
       Title: record.fields.Title,
       Annotation: record.fields.Annotation,
@@ -35,14 +34,14 @@ class BookContainer extends React.PureComponent {
       Subscribers: record.fields.Subscribers,
       Authors: authors,
       SimilarBooksIds: record.fields.SimilarBooks
-    })
+    });
   }
 
   render() {
-    const book = this._mapFromAirtable(this.props.bookRecords)
+    const book = this._mapFromAirtable(this.props.bookRecords);
     return (
       <Book isLoading={!book} book={book} />
-    )
+    );
   }
 }
 
