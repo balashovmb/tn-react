@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PriceInput from './PriceInput'
+import PriceInput from './PriceInput';
 
 class PriceInputContainer extends React.PureComponent {
   constructor(props) {
@@ -18,14 +18,14 @@ class PriceInputContainer extends React.PureComponent {
 
   render() {
     const { minimalPrice } = this.props;
-    const price = this.state.price;
+    const { price } = this.state;
     return (
       <div style={styles.container}>
         {(price < minimalPrice && price !== '') && <div style={styles.message}>Взнос не может быть меньше минимальной цены</div>}
-        <PriceInput price={price} minimalPrice={minimalPrice} label='Взнос' commission={0} setPrice={this.setPrice} focus />
-        <PriceInput price={price} minimalPrice={minimalPrice} label='Доход автора' commission={0.1} setPrice={this.setPrice} />
+        <PriceInput price={price} minimalPrice={minimalPrice} label="Взнос" commission={0} setPrice={this.setPrice} focus />
+        <PriceInput price={price} minimalPrice={minimalPrice} label="Доход автора" commission={0.1} setPrice={this.setPrice} />
       </div>
-    )
+    );
   }
 }
 
@@ -42,4 +42,4 @@ const styles = {
     color: 'red'
   }
 
-}
+};

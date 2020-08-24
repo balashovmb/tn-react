@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
-import Book from '../Book/Book';
+import Book from './Book';
 
 import { book, bookWithoutAuthors } from '../common/data';
 
@@ -23,7 +23,7 @@ test('renders information about the book', () => {
 
 test('renders empty book info', () => {
   const { getByText } = render(<Book />);
-  expect(getByText('Информация о книге отсутствует.')).toBeInTheDocument();
+  expect(getByText('Информация о книге отсутствует', { exact: false })).toBeInTheDocument();
 })
 
 test('renders author not specified message', () => {

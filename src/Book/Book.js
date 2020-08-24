@@ -5,15 +5,12 @@ import SubscriptionTerms from './SubscribtionTerms';
 import BookCover from './BookCover';
 import QuestionForm from './QuestionForm';
 import AuthorsString from '../Author/AuthorsString';
-import SimilarBooks from './SimilarBooks';
 import PriceInputContainer from './PriceInputContainer';
-import withLoader from '../HOC/withLoader';
 import SimilarBooksContainer from './SimilarBooksContainer';
-import withBooks from '../HOC/withBooks';
 
 const Book = (props) => {
   if (!props.book) {
-    return <div>Информация о книге отсутствует.</div>
+    return <div>Информация о книге отсутствует.</div>;
   }
   const {
     book: {
@@ -57,8 +54,8 @@ const Book = (props) => {
       <QuestionForm />
       <SimilarBooksContainer bookIds={SimilarBooksIds} />
     </div>
-  )
-}
+  );
+};
 
 const styles = {
   bookContainer: {
@@ -71,6 +68,6 @@ const styles = {
   tagHot: {
     fontWeight: 'bold'
   }
-}
+};
 
 export default Book;

@@ -7,17 +7,17 @@ const SubscriptionTerms = () => {
 
   const toggle = () => {
     setIsOpen(isOpen => !isOpen);
-  }
+  };
 
   return (
     <>
-      <br></br>
-      <a onClick={() => toggle()}>Условия подписки</a>
+      <br />
+      <button onClick={() => toggle()}>Условия подписки</button>
       {
         isOpen && ReactDOM.createPortal(
           <div style={styles.overlay}>
             <div style={styles.body}>
-              <table >
+              <table>
                 <thead>
                   <tr>
                     <th>Взнос</th>
@@ -46,9 +46,8 @@ const SubscriptionTerms = () => {
         )
       }
     </>
-  )
-}
-
+  );
+};
 
 export default SubscriptionTerms;
 
@@ -68,4 +67,4 @@ const styles = {
     backgroundColor: '#fff',
     padding: '10px'
   }
-}
+};

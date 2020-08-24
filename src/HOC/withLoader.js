@@ -8,5 +8,5 @@ const withLoader = EnhancedComponent => (
         : <EnhancedComponent {...props} />
     );
   }
-)
+);
 export default withLoader;

@@ -6,5 +6,5 @@ import AuthorsList from './AuthorsList';
 
 test('renders authors info is empty message', () => {
   const { getByText } = render(<AuthorsList />)
-  expect(getByText('Информация об авторах отсутствует.')).toBeInTheDocument();
+  expect(getByText('Информация об авторах отсутствует', { exact: false })).toBeInTheDocument();
 })

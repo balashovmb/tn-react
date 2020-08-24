@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import _ from 'lodash';
 
 import { API_TOKEN } from '../common/data';
 
@@ -8,16 +7,16 @@ const httpClient = axios.create({
   baseURL: 'https://api.airtable.com/v0/appDH1YfToGXZokH7',
   timeout: 2000,
   headers: {
-    'Authorization': `Bearer ${API_TOKEN}`
+    Authorization: `Bearer ${API_TOKEN}`
   }
-})
+});
 
 const withBooks = EnhancedComponent => class WithBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       result: null
-    }
+    };
   }
 
   componentDidMount() {
@@ -25,9 +24,8 @@ const withBooks = EnhancedComponent => class WithBooks extends React.Component {
   }
 
   _fetchData() {
-    Promise.all(this.props.bookIds.map(bookId =>
-      httpClient.get(`/Books/${bookId}`)))
-      .then(result => this.setState((state) => ({ result: result })))
+    Promise.all(this.props.bookIds.map(bookId => httpClient.get(`/Books/${bookId}`)))
+      .then(result => this.setState(() => ({ result })));
   }
 
   render() {
@@ -36,6 +34,6 @@ const withBooks = EnhancedComponent => class WithBooks extends React.Component {
       <EnhancedComponent {...this.props} isLoading={!result} bookRecords={result} />
     );
   }
-}
+};
 
 export default withBooks;

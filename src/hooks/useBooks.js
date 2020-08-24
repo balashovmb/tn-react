@@ -7,15 +7,14 @@ const httpClient = axios.create({
   baseURL: 'https://api.airtable.com/v0/appDH1YfToGXZokH7',
   timeout: 2000,
   headers: {
-    'Authorization': `Bearer ${API_TOKEN}`
+    Authorization: `Bearer ${API_TOKEN}`
   }
-})
+});
 
 function _fetchData(bookIds) {
   return (
-    Promise.all(bookIds.map(bookId =>
-      httpClient.get(`/Books/${bookId}`)))
-  )
+    Promise.all(bookIds.map(bookId => httpClient.get(`/Books/${bookId}`)))
+  );
 }
 
 const useBooks = (bookIds) => {
@@ -24,7 +23,7 @@ const useBooks = (bookIds) => {
   useEffect(() => {
     _fetchData(bookIds).then(records => {
       setRecords(records);
-    })
+    });
   }, [bookIds]);
   return records;
 };

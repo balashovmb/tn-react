@@ -1,12 +1,10 @@
 import React from 'react';
 
-const Avatar = ({ avatar, name }) => {
-  return (
-    <div style={styles.imageBox}>
-      <img style={styles.image} src={avatar} alt={avatar ? name : 'Фото отсутствует.'}></img>
-    </div>
-  )
-}
+const Avatar = ({ avatar, name }) => (
+  <div style={styles.imageBox}>
+    <img style={styles.image} src={avatar} alt={avatar ? name : 'Фото отсутствует.'} />
+  </div>
+);
 
 const styles = {
   imageBox: {
@@ -15,6 +13,6 @@ const styles = {
   image: {
     width: '100%'
   }
-}
+};
 
 export default Avatar;
