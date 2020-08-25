@@ -6,7 +6,7 @@ const AuthorsString = ({ authors }) => {
   let authorsString = authors.length > 1 ? 'Авторы: ' : 'Автор: ';
   authorsString += authors.map(author => author.Name).join(', ');
 
-  return <div>{authorsString}</div>;
+  return <span>{authorsString}</span>;
 };
 
 export default AuthorsString;
