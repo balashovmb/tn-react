@@ -30,5 +30,7 @@ module.exports = {
     'class-methods-use-this': 0,
     'no-shadow': 0,
     'react/jsx-props-no-spreading': 0,
+    'global-require': 0,
+    'import/no-extraneous-dependencies': 0,
   }
 };

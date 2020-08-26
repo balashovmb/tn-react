@@ -20,8 +20,8 @@ class PriceInputContainer extends React.PureComponent {
     const { minimalPrice } = this.props;
     const { price } = this.state;
     return (
-      <div style={styles.container}>
-        {(price < minimalPrice && price !== '') && <div style={styles.message}>Взнос не может быть меньше минимальной цены</div>}
+      <div className="mt-4">
+        {(price < minimalPrice && price !== '') && <div className="text-red-700">Взнос не может быть меньше минимальной цены</div>}
         <PriceInput price={price} minimalPrice={minimalPrice} label="Взнос" commission={0} setPrice={this.setPrice} focus />
         <PriceInput price={price} minimalPrice={minimalPrice} label="Доход автора" commission={0.1} setPrice={this.setPrice} />
       </div>
@@ -30,16 +30,3 @@ class PriceInputContainer extends React.PureComponent {
 }
 
 export default PriceInputContainer;
-
-const styles = {
-  inputField: {
-    width: '50px'
-  },
-  container: {
-    marginTop: '20px'
-  },
-  message: {
-    color: 'red'
-  }
-
-};

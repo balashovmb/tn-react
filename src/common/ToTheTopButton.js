@@ -8,20 +8,20 @@ class ToTheTopButton extends React.PureComponent {
     this.handleScroll = debounce(this.handleScroll.bind(this), 100);
   }
 
-  handleScroll() {
-    if (window.pageYOffset > 100) {
-      this.setState({ display: 'block' })
-    } else {
-      this.setState({ display: 'none' })
-    }
-  }
-
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll() {
+    if (window.pageYOffset > 100) {
+      this.setState({ display: 'block' });
+    } else {
+      this.setState({ display: 'none' });
+    }
   }
 
   toTheTop(e) {
@@ -31,22 +31,12 @@ class ToTheTopButton extends React.PureComponent {
 
   render() {
     const { display } = this.state;
-    const style = { ...styles.button, display }
+    const style = { display };
 
     return (
-      <button style={style} onClick={(e) => this.toTheTop(e)}>Go to the top</button>
+      <button className="standard-btn bg-gray-200 fixed bottom-0 right-0 mr-32 mb-20" style={style} onClick={(e) => this.toTheTop(e)}>Наверх</button>
     );
   }
-
 }
 
 export default ToTheTopButton;
-
-const styles = {
-  button: {
-    right: '100px',
-    bottom: '20px',
-    position: 'fixed',
-    display: 'none'
-  }
-}

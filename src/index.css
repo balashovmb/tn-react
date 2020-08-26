@@ -1,3 +1,17 @@
 * {
   font-family: "Open Sans", helvetica, arial, sans-serif;
 }
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+.standard-btn {
+  @apply border p-1 border-gray-400 rounded;
+}
+
+.standard-btn-gray {
+  @apply standard-btn bg-gray-200
+}

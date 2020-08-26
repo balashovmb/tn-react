@@ -30,15 +30,17 @@ const BookInfo = ({ book }) => (
 
 export default BookInfo;
 
-const styles = {
-  infoContainer: {
-    display: 'flex'
-  },
-  textContainer: {
-    flex: '1',
-    paddingLeft: '10px'
-  },
-};
+const Info = ({ children }) => (
+  <div className="flex flex-col md:flex-row">
+    {children}
+  </div>
+);
+
+const TextContainer = ({ children }) => (
+  <div className="mx-2">
+    {children}
+  </div>
+);
 
 const Language = ({ children }) => (
   <div>
@@ -94,19 +96,7 @@ const Pages = ({ children }) => (
 );
 
 const Title = ({ children }) => (
-  <div>
-    {children}
-  </div>
-);
-
-const Info = ({ children }) => (
-  <div style={styles.infoContainer}>
-    {children}
-  </div>
-);
-
-const TextContainer = ({ children }) => (
-  <div style={styles.textContainer}>
+  <div className="font-bold">
     {children}
   </div>
 );

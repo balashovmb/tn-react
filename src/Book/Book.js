@@ -29,7 +29,7 @@ const Book = (props) => {
 export default Book;
 
 const BookPage = ({ children }) => (
-  <div>
+  <div className="mx-4 my-2">
     {children}
   </div>
 );

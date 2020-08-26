@@ -4,7 +4,7 @@ const withLoader = EnhancedComponent => (
   function withLoader(props) {
     return (
       props.isLoading
-        ? <div>Идет загрузка...</div>
+        ? <div className="ml-4">Идет загрузка...</div>
         : <EnhancedComponent {...props} />
     );
   }

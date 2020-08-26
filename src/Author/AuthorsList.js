@@ -30,7 +30,7 @@ class AuthorsList extends React.Component {
           </div>
         ))}
         {((authorsLength > 3) && (!this.state.allAuthors))
-          && <button onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </button>}
+          && <button className="standard-btn-gray m-2" onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </button>}
       </div>
     );
   }
