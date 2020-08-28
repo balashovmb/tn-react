@@ -41,6 +41,7 @@
     "lodash": "^4.17.19",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-toggle": "^4.1.1",
     "tailwindcss": "^1.7.3"
   }
 }
