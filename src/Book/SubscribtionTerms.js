@@ -20,28 +20,28 @@ const SubscriptionTerms = () => {
               <div className=" text-right mr-4">
                 <button className="standard-btn self-center bg-gray-400" onClick={() => toggle()}>Закрыть</button>
               </div>
-              <table className="border">
-                <thead>
-                  <tr className="border border-gray-400">
-                    <th className="border border-gray-400">Взнос</th>
-                    <th className="border border-gray-400">Привилегии</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border border-gray-400">
-                    <td className="border border-gray-400">500</td>
-                    <td className="border border-gray-400">Экземпляр книги</td>
-                  </tr>
-                  <tr className="border border-gray-400">
-                    <td className="border border-gray-400">1000</td>
-                    <td className="border border-gray-400">Экземпляр книги из первой отпечатанной партии</td>
-                  </tr>
-                  <tr className="border border-gray-400">
-                    <td className="border border-gray-400">5000</td>
-                    <td className="border border-gray-400">Экземпляр книги из первой отпечатанной партии с автографом автора</td>
-                  </tr>
-                </tbody>
-              </table>
+              <Table>
+                <TableHead>
+                  <Row>
+                    <Cell>Взнос</Cell>
+                    <Cell>Привилегии</Cell>
+                  </Row>
+                </TableHead>
+                <TableBody>
+                  <Row>
+                    <Cell>500</Cell>
+                    <Cell>Экземпляр книги</Cell>
+                  </Row>
+                  <Row>
+                    <Cell>1000</Cell>
+                    <Cell>Экземпляр книги из первой отпечатанной партии</Cell>
+                  </Row>
+                  <Row>
+                    <Cell>5000</Cell>
+                    <Cell>Экземпляр книги из первой отпечатанной партии с автографом автора</Cell>
+                  </Row>
+                </TableBody>
+              </Table>
             </div>
           </div>,
           document.getElementById('modal-root')
@@ -52,3 +52,33 @@ const SubscriptionTerms = () => {
 };
 
 export default SubscriptionTerms;
+
+const Table = ({ children }) => (
+  <table className="border">
+    {children}
+  </table>
+);
+
+const TableHead = ({ children }) => (
+  <thead className="border border-gray-400 font-bold">
+    {children}
+  </thead>
+);
+
+const TableBody = ({ children }) => (
+  <tbody className="border border-gray-400">
+    {children}
+  </tbody>
+);
+
+const Cell = ({ children }) => (
+  <td className="border border-gray-400">
+    {children}
+  </td>
+);
+
+const Row = ({ children }) => (
+  <tr className="border border-gray-400">
+    {children}
+  </tr>
+);

@@ -1,8 +1,11 @@
 import React from 'react';
 
+import ButtonGray from '../common/ButtonGray';
+
 const QuestionForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
+    // eslint-disable-next-line no-console
     console.log({
       name: e.target.name.value,
       email: e.target.email.value,
@@ -27,7 +30,7 @@ const QuestionForm = () => {
       <div className="mt-2">
         <p><label htmlFor="question">Вопрос</label></p>
         <p><textarea className="border-2 border-gray-400 w-full h-20 md:w-1/2 md:h-24" id="question" /></p>
-        <p><button className="standard-btn" type="submit">Отправить</button></p>
+        <p><ButtonGray type="submit">Отправить</ButtonGray></p>
       </div>
     </form>
 

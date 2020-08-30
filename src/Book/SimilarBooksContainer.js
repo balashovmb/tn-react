@@ -43,7 +43,11 @@ class SimilarBooksContainer extends React.PureComponent {
     const bookRecordsToShow = this._bookRecordsToShow(bookRecords);
     const booksToShow = this._mapFromAirtable(bookRecordsToShow);
     return (
-      <SimilarBooks booksToShow={booksToShow} removeFromSimilarBook={this.removeFromSimilarBook} isLoading={booksToShow.length === 0} />
+      <SimilarBooks
+        booksToShow={booksToShow}
+        removeFromSimilarBook={this.removeFromSimilarBook}
+        isLoading={booksToShow.length === 0}
+      />
     );
   }
 }
