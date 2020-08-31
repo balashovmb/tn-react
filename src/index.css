@@ -23,7 +23,7 @@
 }
 
 .standard-btn {
-  @apply border p-1 border-gray-400 rounded;
+  @apply border p-1 border-gray-400 rounded --text-main;
 }
 
 .standard-btn-gray {
