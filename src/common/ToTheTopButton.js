@@ -1,6 +1,6 @@
 import React from 'react';
 import debounce from './debounce';
-import ButtonGray from './ButtonGray';
+import Button from './Button';
 
 class ToTheTopButton extends React.PureComponent {
   constructor(props) {
@@ -35,7 +35,7 @@ class ToTheTopButton extends React.PureComponent {
     const style = { display };
 
     return (
-      <ButtonGray className="fixed bottom-0 right-0 mr-32 mb-20" style={style} onClick={(e) => this.toTheTop(e)}>Наверх</ButtonGray>
+      <Button gray className="fixed bottom-0 right-0 mr-32 mb-20" style={style} onClick={(e) => this.toTheTop(e)}>Наверх</Button>
     );
   }
 }

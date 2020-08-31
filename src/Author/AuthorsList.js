@@ -1,6 +1,6 @@
 import React from 'react';
 import AboutAuthor from './AboutAuthor';
-import ButtonGray from '../common/ButtonGray';
+import Button from '../common/Button';
 
 class AuthorsList extends React.Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class AuthorsList extends React.Component {
           </div>
         ))}
         {((authorsLength > 3) && (!this.state.allAuthors))
-          && <ButtonGray className="m-2" onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </ButtonGray>}
+          && <Button gray className="m-2" onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </Button>}
       </div>
     );
   }

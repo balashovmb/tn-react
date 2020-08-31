@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonGray from '../common/ButtonGray';
+import Button from '../common/Button';
 
 const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
   const {
@@ -16,7 +16,7 @@ const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
       <div className="ml-2">
         <div className="font-bold">{Title}</div>
         <div>{Authors}</div>
-        <ButtonGray type="button" className="m-1 text-sm" onClick={() => removeFromSimilarBook(book.Id)}>Убрать</ButtonGray>
+        <Button gray type="button" className="m-1 text-sm" onClick={() => removeFromSimilarBook(book.Id)}>Убрать</Button>
       </div>
     </div>
   );

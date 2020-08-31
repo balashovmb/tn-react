@@ -14,14 +14,14 @@ const BookInfo = ({ book }) => (
       <Row label="" className="font-bold">{book.Title}</Row>
       <AuthorsString authors={book.Authors} />
       <Row label=""> {book.Annotation} </Row>
-      <Row label="Количество страниц: "> {book.Pages} </Row>
-      <Row label="Язык: ">{book.Language}</Row>
-      <Row label="Процент прогресса: ">{book.Progress}</Row>
-      <Row label="Минимальная цена: ">{book.MinimalPrice}</Row>
-      <Row label="Желаемая цена: ">{book.ExpectedPrice}</Row>
-      <Row label="Собранная сумма: ">{book.Amount}</Row>
-      <Row label="Ожидаемая сумма: ">{book.ExpectedAmount}</Row>
-      <Row label="Подписчики: ">{book.Subscribers}</Row>
+      <Row label="Количество страниц"> {book.Pages} </Row>
+      <Row label="Язык">{book.Language}</Row>
+      <Row label="Процент прогресса">{book.Progress}</Row>
+      <Row label="Минимальная цена">{book.MinimalPrice}</Row>
+      <Row label="Желаемая цена">{book.ExpectedPrice}</Row>
+      <Row label="Собранная сумма">{book.Amount}</Row>
+      <Row label="Ожидаемая сумма">{book.ExpectedAmount}</Row>
+      <Row label="Подписчики">{book.Subscribers}</Row>
       <SubscriptionTerms />
       <PriceInputContainer minimalPrice={book.MinimalPrice} />
     </TextContainer>
@@ -43,5 +43,5 @@ const TextContainer = ({ children }) => (
 );
 
 const Row = ({ children, label, className }) => (
-  <div className={className}>{label}{children}</div>
+  <div className={className}>{label}{label && ': '}{children}</div>
 );

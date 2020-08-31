@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ButtonGray from '../common/ButtonGray';
+import Button from '../common/Button';
 
 const QuestionForm = () => {
   const handleSubmit = (e) => {
@@ -30,7 +30,7 @@ const QuestionForm = () => {
       <div className="mt-2">
         <p><label htmlFor="question">Вопрос</label></p>
         <p><textarea className="border-2 border-gray-400 w-full h-20 md:w-1/2 md:h-24" id="question" /></p>
-        <p><ButtonGray type="submit">Отправить</ButtonGray></p>
+        <p><Button gray type="submit">Отправить</Button></p>
       </div>
     </form>
 
