@@ -35,7 +35,7 @@ class ToTheTopButton extends React.PureComponent {
     const style = { display };
 
     return (
-      <Button gray className="fixed bottom-0 right-0 mr-32 mb-20" style={style} onClick={(e) => this.toTheTop(e)}>Наверх</Button>
+      <Button className="fixed bottom-0 right-0 mr-32 mb-20" style={style} onClick={(e) => this.toTheTop(e)}>Наверх</Button>
     );
   }
 }

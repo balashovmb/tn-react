@@ -8,10 +8,20 @@
 
 @tailwind utilities;
 
-.standard-btn {
-  @apply border p-1 border-gray-400 rounded;
+.theme-light {
+  --primary: #f8f8f8;
+  --secondary: #e7e7e7;
+  --text-main: #0d0106;
+  --text-secondary: #acacac;
+  --accent: #009ffd;
+}.theme-dark {
+  --primary: #12181b;
+  --secondary: #2f333a;
+  --text-main: #eaeaea;
+  --text-secondary: #b8b8b9;
+  --accent: #fc7753;
 }
 
-.standard-btn-gray {
-  @apply standard-btn bg-gray-200
+.standard-btn {
+  @apply border p-1 border-secondary-text bg-secondary rounded text-main-text;
 }

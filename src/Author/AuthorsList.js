@@ -24,14 +24,14 @@ class AuthorsList extends React.Component {
     const authorsLength = authors.length;
 
     return (
-      <div>
+      <div className="mt-6">
         {this.authorsToRender(authors).map(author => (
           <div key={author.Id}>
             <AboutAuthor author={author} />
           </div>
         ))}
         {((authorsLength > 3) && (!this.state.allAuthors))
-          && <Button gray className="m-2" onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </Button>}
+          && <Button className="m-2" onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </Button>}
       </div>
     );
   }
