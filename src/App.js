@@ -4,15 +4,25 @@ import BookContainer from './Book/BookContainer';
 import Header from './common/Header';
 import Footer from './common/Footer';
 import ToTheTopButton from './common/ToTheTopButton';
+import Layout from './common/Layout';
+import ThemeContextProvider from './common/ThemeContext';
 
 const App = () => (
-  <>
-    <Header />
-    <h3>Подписаться на книгу</h3>
-    <BookContainer bookIds={['recCSoQw7GacF3O5O']} />
-    <Footer />
-    <ToTheTopButton />
-  </>
+  <ThemeContextProvider>
+    <Layout>
+      <Header />
+      <SubscribeHeader>Подписаться на книгу</SubscribeHeader>
+      <BookContainer bookIds={['recCSoQw7GacF3O5O']} />
+      <Footer />
+      <ToTheTopButton />
+    </Layout>
+  </ThemeContextProvider>
 );
 
 export default App;
+
+const SubscribeHeader = ({ children }) => (
+  <h3 className="font-bold text-3xl ml-4">
+    {children}
+  </h3>
+);

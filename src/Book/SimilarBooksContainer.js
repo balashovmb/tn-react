@@ -1,18 +1,7 @@
 import React from 'react';
-import axios from 'axios';
 
 import SimilarBooks from './SimilarBooks';
 import withBooks from '../HOC/withBooks';
-
-import { API_TOKEN } from '../common/data';
-
-const httpClient = axios.create({
-  baseURL: 'https://api.airtable.com/v0/appDH1YfToGXZokH7',
-  timeout: 2000,
-  headers: {
-    'Authorization': `Bearer ${API_TOKEN}`
-  }
-})
 
 class SimilarBooksContainer extends React.PureComponent {
   constructor(props) {
@@ -39,14 +28,14 @@ class SimilarBooksContainer extends React.PureComponent {
         Cover: record.data.fields.Cover,
         Authors: authors,
         Id: record.data.id
-      })
-    }))
+      });
+    }));
   }
 
   removeFromSimilarBook(currentBookId) {
     this.setState((state) => ({
-      hiddenBookIds: [...this.state.hiddenBookIds, currentBookId]
-    }))
+      hiddenBookIds: [state.hiddenBookIds, currentBookId]
+    }));
   }
 
   render() {
@@ -54,8 +43,12 @@ class SimilarBooksContainer extends React.PureComponent {
     const bookRecordsToShow = this._bookRecordsToShow(bookRecords);
     const booksToShow = this._mapFromAirtable(bookRecordsToShow);
     return (
-      <SimilarBooks booksToShow={booksToShow} removeFromSimilarBook={this.removeFromSimilarBook} isLoading={booksToShow.length === 0} />
-    )
+      <SimilarBooks
+        booksToShow={booksToShow}
+        removeFromSimilarBook={this.removeFromSimilarBook}
+        isLoading={booksToShow.length === 0}
+      />
+    );
   }
 }
 

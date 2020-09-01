@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../common/Button';
 
 const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
   const {
@@ -8,33 +9,17 @@ const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
   } = book;
 
   return (
-    <div style={styles.book}>
-      <div style={styles.imageBox}>
-        <img src={Cover} alt={Title} style={styles.image} />
+    <div className="flex flex-row mt-2 border-t-2 pt-1">
+      <div className="w-16">
+        <img className="mt-1" src={Cover} alt={Title} />
       </div>
-      <div style={styles.textContainer}>
-        <div>{Title}</div>
+      <div className="ml-2">
+        <div className="font-bold">{Title}</div>
         <div>{Authors}</div>
-        <button type="button" onClick={() => removeFromSimilarBook(book.Id)}>Убрать</button>
+        <Button type="button" className="m-1 text-sm" onClick={() => removeFromSimilarBook(book.Id)}>Убрать</Button>
       </div>
     </div>
   );
 });
 
 export default SimilarBook;
-
-const styles = {
-  book: {
-    marginTop: '10px',
-    display: 'flex'
-  },
-  imageBox: {
-    maxWidth: '40px'
-  },
-  image: {
-    width: '100%'
-  },
-  textContainer: {
-    flex: '1'
-  }
-};

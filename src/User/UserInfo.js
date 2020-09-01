@@ -4,17 +4,17 @@ import UserContext from './UserContext';
 const UserInfo = () => {
   const user = useContext(UserContext);
   return (
-    <div style={styles.user}>
+    <div className="float-right">
       {
         (user.firstName || user.lastName)
           ? (
-            <div style={styles.container}>
+            <div className="flex">
               {user.avatarUrl && (
-              <div style={styles.imageBox}>
-                <img style={styles.image} src={user.avatarUrl} alt="user.firstName user.lastName" data-testid="user-avatar" />
+              <div className="w-10">
+                <img src={user.avatarUrl} alt="user.firstName user.lastName" data-testid="user-avatar" className="rounded" />
               </div>
               )}
-              <div style={styles.textContainer}>
+              <div className="flex-row text-sm ml-2 mr-2">
                 <div>{user.firstName}</div>
                 <div>{user.lastName}</div>
               </div>
@@ -27,24 +27,3 @@ const UserInfo = () => {
 };
 
 export default UserInfo;
-
-const styles = {
-  user: {
-    alignItems: 'right',
-    float: 'right',
-    fontSize: '0.8rem',
-    fontWeight: 'normal',
-  },
-  imageBox: {
-    maxWidth: '30px',
-  },
-  image: {
-    width: '100%',
-  },
-  container: {
-    display: 'flex',
-  },
-  textContainer: {
-    flex: '1',
-  },
-};

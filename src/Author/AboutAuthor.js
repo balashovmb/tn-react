@@ -11,24 +11,15 @@ const AboutAuthor = (props) => {
   } = props;
 
   return (
-    <div style={styles.container}>
+    <div className="flex p-1 border-t">
       <Avatar avatar={AvatarUrl} name={Name} />
-      <div style={styles.textContainer}>
-        <div>{Name}</div>
+      <div className="flex-row ml-2">
+        <div className="font-bold">{Name}</div>
         <div>{Email}</div>
         <div>{Info}</div>
       </div>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    display: 'flex'
-  },
-  textContainer: {
-    flex: '1'
-  }
 };
 
 export default AboutAuthor;

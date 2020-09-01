@@ -1,30 +1,20 @@
 import React from 'react';
 import UserInfo from '../User/UserInfo';
+import ThemeToggle from './ThemeToggle';
 
-const Header = () => {
-  return (
-    <header style={styles.header}>
-      <span style={styles.textHeader}>
-        Bookstarter
-        </span>
+const Header = () => (
+  <header className="h-20 border bg-primary">
+    <span className="flex items-center justify-center text-xl font-bold text-main-text">
+      Bookstarter
+    </span>
+    <div>
+      <div className="float-left ml-2">
+        <ThemeToggle />
+      </div>
       <UserInfo />
-    </header>
-  )
-}
+    </div>
 
+  </header>
+
+);
 export default Header;
-
-const styles = {
-  header: {
-    backgroundColor: '#22222222',
-    minHeight: '60px',
-
-  },
-  textHeader: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '1.2rem',
-    fontWeight: 'bold'
-  }
-}

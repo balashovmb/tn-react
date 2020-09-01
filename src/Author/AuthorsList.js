@@ -1,5 +1,6 @@
 import React from 'react';
 import AboutAuthor from './AboutAuthor';
+import Button from '../common/Button';
 
 class AuthorsList extends React.Component {
   constructor(props) {
@@ -23,14 +24,14 @@ class AuthorsList extends React.Component {
     const authorsLength = authors.length;
 
     return (
-      <div>
+      <div className="mt-6">
         {this.authorsToRender(authors).map(author => (
           <div key={author.Id}>
             <AboutAuthor author={author} />
           </div>
         ))}
         {((authorsLength > 3) && (!this.state.allAuthors))
-          && <button onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </button>}
+          && <Button className="m-2" onClick={() => this.toggle()}>Показать всех {authorsLength} авторов. </Button>}
       </div>
     );
   }
