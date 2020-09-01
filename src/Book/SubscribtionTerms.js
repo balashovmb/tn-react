@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
-
+import React, { useState, useContext } from 'react';
 import ReactDOM from 'react-dom';
+
+import Button from '../common/Button';
+import { ThemeContext } from '../common/ThemeContext';
 
 const SubscriptionTerms = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme } = useContext(ThemeContext);
 
   const toggle = () => {
     setIsOpen(isOpen => !isOpen);
@@ -12,15 +15,16 @@ const SubscriptionTerms = () => {
   return (
     <>
       <br />
-      <button className="standard-btn-gray" onClick={() => toggle()}>Условия подписки</button>
+      <Button className="standard-btn" onClick={() => toggle()}>Условия подписки</Button>
       {
         isOpen && ReactDOM.createPortal(
-          <div className="bg-gray-900  appearance-none top-0 bottom-0 left-0 right-0 absolute flex justify-center">
-            <div className="bg-gray-200 self-center">
+          <div className="bg-gray-900 appearance-none top-0 bottom-0 left-0 right-0 absolute flex justify-center">
+            <div className={`${
+              theme === 'light' ? 'theme-light' : 'theme-dark'} bg-primary self-center border`}>
               <div className=" text-right mr-4">
-                <button className="standard-btn self-center bg-gray-400" onClick={() => toggle()}>Закрыть</button>
+                <Button className="self-center bg-primary" onClick={() => toggle()}>Закрыть</Button>
               </div>
-              <Table>
+              <Table theme={theme}>
                 <TableHead>
                   <Row>
                     <Cell>Взнос</Cell>
@@ -54,7 +58,7 @@ const SubscriptionTerms = () => {
 export default SubscriptionTerms;
 
 const Table = ({ children }) => (
-  <table className="border">
+  <table className="border bg-primary text-main-text">
     {children}
   </table>
 );

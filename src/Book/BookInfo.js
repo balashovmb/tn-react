@@ -37,7 +37,7 @@ const Info = ({ children }) => (
 );
 
 const TextContainer = ({ children }) => (
-  <div className="mx-2">
+  <div className="ml-6">
     {children}
   </div>
 );

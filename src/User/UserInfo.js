@@ -14,7 +14,7 @@ const UserInfo = () => {
                 <img src={user.avatarUrl} alt="user.firstName user.lastName" data-testid="user-avatar" className="rounded" />
               </div>
               )}
-              <div className="flex-row text-sm">
+              <div className="flex-row text-sm ml-2 mr-2">
                 <div>{user.firstName}</div>
                 <div>{user.lastName}</div>
               </div>
