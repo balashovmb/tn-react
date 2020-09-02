@@ -18,6 +18,7 @@ const Book = (props) => {
 
   return (
     <BookPage>
+      <SubscribeHeader>Подписаться на книгу</SubscribeHeader>
       <BookInfo {...props} />
       <AuthorsList authors={Authors} />
       <QuestionForm />
@@ -32,4 +33,10 @@ const BookPage = ({ children }) => (
   <div className="mx-4 my-2">
     {children}
   </div>
+);
+
+const SubscribeHeader = ({ children }) => (
+  <h3 className="font-bold text-3xl ml-4">
+    {children}
+  </h3>
 );
