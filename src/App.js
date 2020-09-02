@@ -1,20 +1,14 @@
 import React from 'react';
 
-import BookContainer from './Book/BookContainer';
-import Header from './common/Header';
-import Footer from './common/Footer';
-import ToTheTopButton from './common/ToTheTopButton';
 import Layout from './common/Layout';
 import ThemeContextProvider from './common/ThemeContext';
+import List from './Book/List';
 
 const App = () => (
   <ThemeContextProvider>
     <Layout>
-      <Header />
       <SubscribeHeader>Подписаться на книгу</SubscribeHeader>
-      <BookContainer bookIds={['recCSoQw7GacF3O5O']} />
-      <Footer />
-      <ToTheTopButton />
+      <List />
     </Layout>
   </ThemeContextProvider>
 );
