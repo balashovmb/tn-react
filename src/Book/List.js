@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import withBooks from '../HOC/withBooks';
 import withLoader from '../HOC/withLoader';
@@ -8,11 +9,16 @@ import ListItem from './ListItem';
 const List = ({ bookRecords }) => {
   const books = bookRecords.data.records.map(record => mapRecordFromAirtable(record));
   return (
-    books.map(book => (
-      <div key={book.Id}>
-        <ListItem book={book} isLoading={!books} />
-      </div>
-    ))
+    <>
+      <Helmet>
+        <title>Все книги</title>
+      </Helmet>
+      {books.map(book => (
+        <div key={book.Id}>
+          <ListItem book={book} isLoading={!books} />
+        </div>
+      ))}
+    </>
   );
 };
 

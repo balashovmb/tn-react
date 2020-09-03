@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 import AuthorsList from '../Author/AuthorsList';
 import QuestionForm from './QuestionForm';
@@ -18,13 +19,18 @@ const Book = (props) => {
   } = props;
 
   return (
-    <BookPage>
-      <SubscribeHeader>Подписаться на книгу</SubscribeHeader>
-      <BookInfo {...props} />
-      <AuthorsList authors={Authors} />
-      <QuestionForm />
-      <SimilarBooksContainer bookIds={SimilarBooksIds} />
-    </BookPage>
+    <>
+      <Helmet>
+        <title>{props.book ? `Bookstarter - ${props.book.Title}` : 'Идет загрузка...'}</title>
+      </Helmet>
+      <BookPage>
+        <SubscribeHeader>Подписаться на книгу</SubscribeHeader>
+        <BookInfo {...props} />
+        <AuthorsList authors={Authors} />
+        <QuestionForm />
+        <SimilarBooksContainer bookIds={SimilarBooksIds} />
+      </BookPage>
+    </>
   );
 };
 
