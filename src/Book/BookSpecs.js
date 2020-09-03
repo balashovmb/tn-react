@@ -8,9 +8,7 @@ const BookSpecs = ({ book, className }) => (
   <div className={className}>
     <TagHot subscribers={book.Subscribers} />
     <Row label="" className="font-bold">
-      <Link to={`/book/${book.Id}`}>
-        {book.Title}
-      </Link>
+      <Link to={`/book/${book.Id}`}>{book.Title}</Link>
     </Row>
     <AuthorsString authors={book.Authors} />
     <Row label=""> {book.Annotation} </Row>

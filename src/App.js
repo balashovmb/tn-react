@@ -9,15 +9,15 @@ import NotFound from './Pages/NotFound';
 
 const App = () => (
   <ThemeContextProvider>
-    <Layout>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Layout>
         <Switch>
           <Route component={List} path="/" exact />
           <Route component={BookContainer} path="/book/:id" strict exact />
           <Route component={NotFound} />
         </Switch>
-      </BrowserRouter>
-    </Layout>
+      </Layout>
+    </BrowserRouter>
   </ThemeContextProvider>
 );
 
