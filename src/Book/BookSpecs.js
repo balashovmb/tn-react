@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import TagHot from './TagHot';
 import AuthorsString from '../Author/AuthorsString';
@@ -6,7 +7,11 @@ import AuthorsString from '../Author/AuthorsString';
 const BookSpecs = ({ book, className }) => (
   <div className={className}>
     <TagHot subscribers={book.Subscribers} />
-    <Row label="" className="font-bold">{book.Title}</Row>
+    <Row label="" className="font-bold">
+      <Link to={`/book/${book.Id}`}>
+        {book.Title}
+      </Link>
+    </Row>
     <AuthorsString authors={book.Authors} />
     <Row label=""> {book.Annotation} </Row>
     <Row label="Количество страниц"> {book.Pages} </Row>

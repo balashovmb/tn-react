@@ -4,6 +4,7 @@ import AuthorsList from '../Author/AuthorsList';
 import QuestionForm from './QuestionForm';
 import SimilarBooksContainer from './SimilarBooksContainer';
 import BookInfo from './BookInfo';
+import withLoader from '../HOC/withLoader';
 
 const Book = (props) => {
   if (!props.book) {
@@ -27,7 +28,7 @@ const Book = (props) => {
   );
 };
 
-export default Book;
+export default withLoader(Book);
 
 const BookPage = ({ children }) => (
   <div className="mx-4 my-2">
