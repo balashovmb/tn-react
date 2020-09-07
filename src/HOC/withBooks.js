@@ -24,8 +24,12 @@ const withBooks = EnhancedComponent => class WithBooks extends React.Component {
   }
 
   _fetchData() {
-    Promise.all(this.props.bookIds.map(bookId => httpClient.get(`/Books/${bookId}`)))
-      .then(result => this.setState(() => ({ result })));
+    if (this.props.bookIds) {
+      Promise.all(this.props.bookIds.map(bookId => httpClient.get(`/Books/${bookId}`)))
+        .then(result => this.setState(() => ({ result })));
+    } else {
+      httpClient.get('/Books?maxRecords=5&view=Grid%20view').then(result => this.setState(() => ({ result })));
+    }
   }
 
   render() {
