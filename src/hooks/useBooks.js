@@ -24,7 +24,7 @@ const useBooks = (bookIds) => {
     _fetchData(bookIds).then(records => {
       setRecords(records);
     });
-  }, [bookIds]);
+  }, bookIds);
   return records;
 };
 
