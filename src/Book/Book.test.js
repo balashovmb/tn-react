@@ -1,13 +1,18 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
+import { BrowserRouter } from 'react-router-dom';
 
 import Book from './Book';
 
 import { book, bookWithoutAuthors } from '../common/data';
 
 test('renders information about the book', () => {
-  const { getByAltText, getByText } = render(<Book book={book} />)
+  const { getByAltText, getByText } = render(
+    <BrowserRouter>
+      <Book book={book} />
+    </BrowserRouter>
+  )
   expect(getByText('В предлагаемой книге описываются простые и изящные решения типичных задач, возникающих в объектно-ориентированном проектировании.')).toBeInTheDocument();
   expect(getByText('Авторы: Эрих Гамма, Ричард Хелм, Ральф Джонсон, Джон Влисидис')).toBeInTheDocument();
   expect(getByText('Количество страниц: 366')).toBeInTheDocument();
@@ -27,6 +32,10 @@ test('renders empty book info', () => {
 })
 
 test('renders author not specified message', () => {
-  const { getByText } = render(<Book book={bookWithoutAuthors} />)
+  const { getByText } = render(
+    <BrowserRouter>
+      <Book book={bookWithoutAuthors} />
+    </BrowserRouter>
+  )
   expect(getByText('Автор не указан.')).toBeInTheDocument();
 })
