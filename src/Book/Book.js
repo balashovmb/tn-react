@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { useHistory } from 'react-router';
 
 import AuthorsList from '../Author/AuthorsList';
 import QuestionForm from './QuestionForm';
@@ -18,6 +19,8 @@ const Book = (props) => {
     }
   } = props;
 
+  const history = useHistory();
+
   return (
     <>
       <Helmet>
@@ -30,6 +33,7 @@ const Book = (props) => {
         <QuestionForm />
         <SimilarBooksContainer bookIds={SimilarBooksIds} />
       </BookPage>
+      <button onClick={() => (history.push('/'))}> Back</button>
     </>
   );
 };

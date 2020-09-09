@@ -9,10 +9,10 @@ import App from './App'
 test('landing on a bad page shows 404 page', () => {
   const history = createMemoryHistory()
   history.push('/some/bad/route')
-  const { getByRole } = render(
+  const { getByText } = render(
     <Router history={history}>
       <App />
     </Router>
   )
-  expect(getByRole('heading')).toHaveTextContent('404 Not Found')
+  expect(getByText('Ничего не найдено.')).toBeInTheDocument();
 })
