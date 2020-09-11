@@ -5,16 +5,19 @@ import { createBrowserHistory } from 'history';
 import Layout from './common/Layout';
 import ThemeContextProvider from './common/ThemeContext';
 import AppRoutes from './common/AppRoutes';
+import WishlistProvider from './Book/WishlistProvider';
 
 const history = createBrowserHistory();
 
 const App = () => (
   <ThemeContextProvider>
-    <Router history={history}>
-      <Layout>
-        <AppRoutes />
-      </Layout>
-    </Router>
+    <WishlistProvider>
+      <Router history={history}>
+        <Layout>
+          <AppRoutes />
+        </Layout>
+      </Router>
+    </WishlistProvider>
   </ThemeContextProvider>
 );
 

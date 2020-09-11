@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 import TagHot from './TagHot';
 import AuthorsString from '../Author/AuthorsString';
 
+import AddToWishlistButton from './AddToWishlistButton';
+
 const BookSpecs = ({ book, className }) => (
   <div className={className}>
     <TagHot subscribers={book.Subscribers} />
     <Row label="" className="font-bold">
       <Link to={`/book/${book.Id}`}>{book.Title}</Link>
+      <AddToWishlistButton book={book} />
     </Row>
     <AuthorsString authors={book.Authors} />
     <Row label=""> {book.Annotation} </Row>
