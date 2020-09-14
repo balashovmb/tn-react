@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 
 export const WishlistContext = createContext({
-  wishlist: '',
+  wishlist: [],
   setWishlist: () => { },
 });
 
@@ -9,7 +9,7 @@ const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState('dark');
   useEffect(() => {
     function loadWishlist() {
-      const wishlist = localStorage.getItem('wishlist');
+      const wishlist = localStorage.getItem('wishlist').split();
       return wishlist || [];
     }
     setWishlist(loadWishlist());
