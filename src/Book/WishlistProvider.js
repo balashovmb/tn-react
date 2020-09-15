@@ -6,10 +6,10 @@ export const WishlistContext = createContext({
 });
 
 const WishlistProvider = ({ children }) => {
-  const [wishlist, setWishlist] = useState('dark');
+  const [wishlist, setWishlist] = useState([]);
   useEffect(() => {
     function loadWishlist() {
-      const wishlist = localStorage.getItem('wishlist').split();
+      const wishlist = localStorage.getItem('wishlist').split(',').filter(Boolean);
       return wishlist || [];
     }
     setWishlist(loadWishlist());
@@ -20,7 +20,7 @@ const WishlistProvider = ({ children }) => {
   }, [wishlist]);
 
   return (
-    <WishlistContext.Provider value={{ wishlist: wishlist, setWishlist: setWishlist }}>
+    <WishlistContext.Provider value={{ wishlist, setWishlist }}>
       {children}
     </WishlistContext.Provider>
   );
