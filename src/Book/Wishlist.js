@@ -1,32 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 
-import useBooks from '../hooks/useBooks';
-import mapRecordFromAirtable from '../common/mapRecordFromAirtable';
 import ListItem from './ListItem';
+import { WishlistContext } from './WishlistProvider';
 
 const Wishlist = () => {
-  const wishlist = localStorage.getItem('wishlist').split(',').filter(Boolean) || [];
-  if (wishlist.length === 0) {
-    return <h3 className="ml-2"> Список желаемого пуст. </h3>;
-  }
-
-  const bookRecords = useBooks(wishlist);
-
-  if (!bookRecords) {
-    return <div> Идет загрузка... </div>;
-  }
-
-  const books = bookRecords.map(record => mapRecordFromAirtable(record.data));
-
+  const { wishlist } = useContext(WishlistContext);
   return (
     <>
       <Helmet>
         <title>Список желаемого</title>
       </Helmet>
-      {books.map(book => (
+      {Object.values(wishlist).length === 0 && <div className="ml-2"> Список желаемого пуст.</div>}
+      {Object.values(wishlist).map(book => (
         <div key={book.Id}>
-          <ListItem book={book} isLoading={!books || !bookRecords} />
+          <ListItem book={book} />
         </div>
       ))}
     </>

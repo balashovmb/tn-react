@@ -1,21 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { WishlistContext } from './WishlistProvider';
 import Button from '../common/Button';
 
 const AddToWishlistButton = ({ book }) => {
-  const { wishlist, setWishlist } = useContext(WishlistContext);
+  const { wishlist, toggleWishlistItem } = useContext(WishlistContext);
+
+  const [itemInWishlist, setItemInWishlist] = useState(Boolean(wishlist[book.Id]));
 
   const handleClick = () => {
-    if (wishlist.includes(book.Id)) {
-      setWishlist(wishlist.filter(item => item !== book.Id));
-    } else {
-      setWishlist(wishlist.concat(book.Id));
-    }
+    setItemInWishlist(() => (!itemInWishlist));
+    toggleWishlistItem(book);
   };
 
   const buttonLabel = () => {
-    if (wishlist.includes(book.Id)) {
+    if (itemInWishlist) {
       return 'Убрать из желаемого';
     }
     return 'Добавить в желаемое';
