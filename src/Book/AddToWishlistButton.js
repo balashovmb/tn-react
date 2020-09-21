@@ -4,17 +4,14 @@ import { WishlistContext } from './WishlistProvider';
 import Button from '../common/Button';
 
 const AddToWishlistButton = ({ book }) => {
-  const { wishlist, toggleWishlistItem } = useContext(WishlistContext);
-
-  const [itemInWishlist, setItemInWishlist] = useState(Boolean(wishlist[book.Id]));
+  const { isWishedBook, toggleWishlistItem } = useContext(WishlistContext);
 
   const handleClick = () => {
-    setItemInWishlist(() => (!itemInWishlist));
     toggleWishlistItem(book);
   };
 
   const buttonLabel = () => {
-    if (itemInWishlist) {
+    if (isWishedBook(book.Id)) {
       return 'Убрать из желаемого';
     }
     return 'Добавить в желаемое';

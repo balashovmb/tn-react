@@ -2,7 +2,8 @@ import React, { useState, createContext } from 'react';
 
 export const WishlistContext = createContext({
   wishlist: {},
-  setWishlist: () => { },
+  isWishedBook: () => { },
+  toggleWishlistItem: () => { }
 });
 
 const WishlistProvider = ({ children }) => {
@@ -22,8 +23,12 @@ const WishlistProvider = ({ children }) => {
     saveInStorage(wishlist);
   };
 
+  const isWishedBook = (bookId) => (
+    Object.keys(wishlist).includes(bookId)
+  );
+
   return (
-    <WishlistContext.Provider value={{ wishlist, setWishlist, toggleWishlistItem }}>
+    <WishlistContext.Provider value={{ wishlist, isWishedBook, toggleWishlistItem }}>
       {children}
     </WishlistContext.Provider>
   );
