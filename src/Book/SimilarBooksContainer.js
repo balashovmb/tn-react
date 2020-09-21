@@ -15,6 +15,7 @@ class SimilarBooksContainer extends React.PureComponent {
 
   _bookRecordsToShow(bookRecords) {
     if (!bookRecords) return [];
+    console.info(bookRecords)
     return bookRecords.filter(br => !this.state.hiddenBookIds.includes(br.data.id)).slice(0, 3);
   }
 

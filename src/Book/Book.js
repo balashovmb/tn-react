@@ -28,7 +28,7 @@ const Book = (props) => {
         <BookInfo {...props} />
         <AuthorsList authors={Authors} />
         <QuestionForm />
-        <SimilarBooksContainer bookIds={SimilarBooksIds} />
+        {SimilarBooksIds && <SimilarBooksContainer bookIds={SimilarBooksIds} />}
       </BookPage>
     </>
   );
