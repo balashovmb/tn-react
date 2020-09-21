@@ -41,6 +41,7 @@ module.exports = {
       required: {
         some: ['nesting', 'id']
       }
-    }]
+    }],
+    'object-curly-newline': 0
   }
 };

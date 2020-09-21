@@ -37,7 +37,7 @@ const Book = (props) => {
 export default withLoader(Book);
 
 const BookPage = ({ children }) => (
-  <div className="mx-4 my-2">
+  <div className="my-2">
     {children}
   </div>
 );
