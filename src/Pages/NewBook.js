@@ -18,7 +18,19 @@ const errors = {
   minimal: 'Минимальная цена должна быть больше 100',
   expected: 'Ожидаемая цена быть больше 100',
   authors: 'Выберите автора из списка',
+  cover: {
+    empty: 'Необходимо приложить изображение обложки',
+    type: 'Недопустимый тип файла',
+    size: 'Размер файла должен быть менее 1 мб'
+  }
 };
+
+const supportedFormats = [
+  'image/jpg',
+  'image/jpeg',
+  'image/gif',
+  'image/png'
+];
 
 const schema = yup.object().shape({
   Title: yup.string().required(errors.required),
@@ -31,6 +43,19 @@ const schema = yup.object().shape({
   ExpectedAmount: yup.number().min(0),
   Subscribers: yup.number().min(0),
   Authors: yup.string().required(errors.authors),
+  Cover: yup.mixed().test(
+    'required',
+    errors.cover.empty,
+    value => value[0]
+  ).test(
+    'fileType',
+    errors.cover.type,
+    value => value && value[0] && supportedFormats.includes(value[0].type)
+  ).test(
+    'fileSize',
+    errors.cover.size,
+    value => value && value[0] && value[0].size <= 1000000
+  )
 });
 
 const NewBook = () => {
@@ -43,17 +68,13 @@ const NewBook = () => {
   const authors = useAuthors();
 
   const onSubmit = async ({ Cover, ...fields }) => {
-    let coverUrl = '';
-    if (Cover[0]) {
-      const formData = new FormData();
-      formData.append('fileUpload', Cover[0]);
-      const uploadResult = await uploadFile(formData);
-      coverUrl = uploadResult.url;
-    }
+    const formData = new FormData();
+    formData.append('fileUpload', Cover[0]);
+    const uploadResult = await uploadFile(formData);
 
     const res = await createBook({
       ...fields,
-      Cover: coverUrl,
+      Cover: uploadResult.url,
       MinimalPrice: parseFloat(fields.MinimalPrice),
       Pages: parseFloat(fields.Pages),
       Progress: parseFloat(fields.Progress),
