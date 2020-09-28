@@ -22,3 +22,15 @@ export function createBook(fields) {
       .then(result => result.data)
   );
 }
+
+export function updateBook(fields, id) {
+  return (
+    httpClient.patch('/Books', {
+      records: [{
+        id,
+        fields
+      }]
+    })
+      .then(result => result.data)
+  );
+}
