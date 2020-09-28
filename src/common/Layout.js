@@ -13,7 +13,9 @@ const Layout = ({ children }) => {
       className={`${theme === 'light' ? 'theme-light' : 'theme-dark'} bg-primary text-main-text  transition-all duration-300 m-0 px-0 min-h-screen`}
     >
       <Header />
-      {children}
+      <div className="ml-5">
+        {children}
+      </div>
       <Footer />
       <ToTheTopButton />
     </div>

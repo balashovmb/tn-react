@@ -7,7 +7,7 @@ import BookSpecs from './BookSpecs';
 
 const BookInfo = ({ book }) => (
   <Info>
-    <BookCover cover={book.Cover} title={book.Title} />
+    {book.Cover && <BookCover cover={book.Cover} title={book.Title} />}
     <TextContainer>
       <BookSpecs book={book} />
       <SubscriptionTerms />

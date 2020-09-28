@@ -125,6 +125,8 @@ const book5 = {
 
 const API_TOKEN = 'keyYoatUKcvLsVwMT';
 
+const FILESTACK_APIKEY = 'ApemqRa2gQtSIYHvNWN9uz';
+
 const booksList = [book2, book3, book4, book5];
 
-export { author, author2, author3, author4, book, bookWithoutAuthors, user, booksList, API_TOKEN };
+export { author, author2, author3, author4, book, bookWithoutAuthors, user, booksList, API_TOKEN, FILESTACK_APIKEY };

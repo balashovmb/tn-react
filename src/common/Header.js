@@ -9,7 +9,7 @@ const Header = () => (
       <Link to="/">Bookstarter</Link>
     </span>
     <div>
-      <div className="float-left ml-2">
+      <div className="float-left ml-4">
         <ThemeToggle />
       </div>
       <UserInfo />
