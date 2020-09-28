@@ -2,7 +2,7 @@ import React from 'react';
 
 const Select = ({ values, register, errors, propToShow, label, ...inputProps }) => (
   <div className="mt-2">
-    <select className="border rounded" ref={register} name={inputProps.name}>
+    <select className="border rounded bg-primary" ref={register} name={inputProps.name}>
       <option value="">Выберите {label}</option>
       {values && values.map(v => <option value={v.Id} key={v.Id}>{v[propToShow]}</option>)}
     </select>

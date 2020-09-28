@@ -7,7 +7,7 @@ const Field = ({ errors, register, label, type, className, defaultValue, ...inpu
     <div>
       <label className="block mt-1" htmlFor={inputProps.name}>{label}</label>
       <Component
-        className={cx('border border-gray-500 rounded w-full md:w-1/2', inputProps.className)}
+        className={cx('border border-gray-500 rounded w-full md:w-1/2 bg-primary', inputProps.className)}
         ref={register}
         type={type}
         defaultValue={defaultValue}

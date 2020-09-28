@@ -21,30 +21,34 @@ const supportedFormats = [
   'image/png'
 ];
 
-const schema = yup.object().shape({
-  Title: yup.string().required(errors.required),
-  Annotation: yup.string().required(errors.required),
-  Pages: yup.number().min(10, errors.pages),
-  Progress: yup.number().min(0, errors.progress).max(100, errors.progress),
-  MinimalPrice: yup.number().min(100, errors.minimal),
-  ExpectedPrice: yup.number().min(100, errors.expected),
-  Amount: yup.number().min(0),
-  ExpectedAmount: yup.number().min(0),
-  Subscribers: yup.number().min(0),
-  Authors: yup.string().required(errors.authors),
-  Cover: yup.mixed().test(
+const schema = (schemaType) => {
+  const cover = yup.mixed().test(
     'required',
     errors.cover.empty,
-    value => value[0]
+    value => value[0] || (schemaType === 'edit' && !value[0])
   ).test(
     'fileType',
     errors.cover.type,
-    value => value && value[0] && supportedFormats.includes(value[0].type)
+    value => (value && value[0] && supportedFormats.includes(value[0].type)) || (schemaType === 'edit' && !value[0])
   ).test(
     'fileSize',
     errors.cover.size,
-    value => value && value[0] && value[0].size <= 1000000
-  )
-});
+    value => (value && value[0] && value[0].size <= 1000000) || (schemaType === 'edit' && !value[0])
+  );
+
+  return yup.object().shape({
+    // Title: yup.string().required(errors.required),
+    // Annotation: yup.string().required(errors.required),
+    // Pages: yup.number().min(10, errors.pages),
+    // Progress: yup.number().min(0, errors.progress).max(100, errors.progress),
+    // MinimalPrice: yup.number().min(100, errors.minimal),
+    // ExpectedPrice: yup.number().min(100, errors.expected),
+    // Amount: yup.number().min(0),
+    // ExpectedAmount: yup.number().min(0),
+    // Subscribers: yup.number().min(0),
+    // Authors: yup.string().required(errors.authors),
+    // Cover: cover
+  });
+};
 
 export default schema;
