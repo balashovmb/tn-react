@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useFieldArray } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 
 import Field from './Field';
@@ -11,8 +11,14 @@ import schema from './bookFormValidation';
 
 const BookForm = ({ onSubmit, book, schemaType }) => {
   const {
-    errors, register, handleSubmit, formState: { isSubmitting }
+    control, errors, register, handleSubmit, formState: { isSubmitting }
   } = useForm({ resolver: yupResolver(schema(schemaType)) });
+
+  const { fields, append, remove } = useFieldArray({
+    control, // control props comes from useForm (optional: if you are using FormContext)
+    name: "test", // unique name for your Field Array
+    // keyName: "id", default to "id", you can change the key name
+  });
 
   const authors = useAuthors();
   const submitButtonText = book ? 'Сохранить изменения' : 'Добавить книгу';
@@ -31,6 +37,13 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
       <AuthorSelect authors={authors} register={register} errors={errors} />
       <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} />
       {book && book.Cover && <BookCover className="mt-2" cover={book.Cover} title={book.title} />}
+      <div name="">
+        {fields.map(({ id }, index) => (
+          <input key={id} name={`test[${index}].value`} ref={register()} />
+
+        ))}
+      </div>
+      <Button onClick={(e) => { e.preventDefault(); append({}); }}>+</Button>
       <Button disabled={isSubmitting} className="mt-2">{isSubmitting ? 'Идет загрузка...' : submitButtonText}</Button>
     </form>
   );
