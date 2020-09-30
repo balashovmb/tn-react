@@ -1,8 +1,8 @@
 import React from 'react';
-import Select from './Select';
+import MultipleSelect from '../common/MultipleSelect';
 
-const AuthorSelect = ({ authors, register, errors }) => (
-  <Select errors={errors} values={authors} name="Authors" register={register} propToShow="Name" label="автора" />
+const AuthorSelect = ({ allAuthors, register, errors, control, bookAuthors }) => (
+  <MultipleSelect errors={errors} allValues={allAuthors} name="Authors" register={register} propToShow="Name" label="автора" control={control} oldValues={bookAuthors} />
 );
 
 export default AuthorSelect;
