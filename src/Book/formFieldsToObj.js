@@ -8,7 +8,7 @@ const formFiedsToObj = (fields, coverUrl) => ({
   Amount: parseFloat(fields.Amount),
   ExpectedAmount: parseFloat(fields.ExpectedAmount),
   Subscribers: parseFloat(fields.Subscribers),
-  Authors: [fields.Authors]
+  Authors: fields.Authors.map(author => author.value)
 });
 
 export default formFiedsToObj;

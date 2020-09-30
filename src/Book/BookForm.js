@@ -14,13 +14,7 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
     control, errors, register, handleSubmit, formState: { isSubmitting }
   } = useForm({ resolver: yupResolver(schema(schemaType)) });
 
-  const { fields, append, remove } = useFieldArray({
-    control, // control props comes from useForm (optional: if you are using FormContext)
-    name: "test", // unique name for your Field Array
-    // keyName: "id", default to "id", you can change the key name
-  });
-
-  const authors = useAuthors();
+  const allAuthors = useAuthors();
   const submitButtonText = book ? 'Сохранить изменения' : 'Добавить книгу';
 
   return (
@@ -34,16 +28,9 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
       <Field errors={errors} name="Amount" label="Собранная сумма" register={register} defaultValue={book ? book.Amount : 0} />
       <Field errors={errors} name="ExpectedAmount" label="Ожидаемая сумма" register={register} defaultValue={book ? book.ExpectedAmount : 0} />
       <Field errors={errors} name="Subscribers" label="Подписчики" register={register} defaultValue={book ? book.Subscribers : 0} />
-      <AuthorSelect authors={authors} register={register} errors={errors} />
+      <AuthorSelect allAuthors={allAuthors} register={register} errors={errors} control={control} bookAuthors={book ? book.Authors : ''} />
       <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} />
       {book && book.Cover && <BookCover className="mt-2" cover={book.Cover} title={book.title} />}
-      <div name="">
-        {fields.map(({ id }, index) => (
-          <input key={id} name={`test[${index}].value`} ref={register()} />
-
-        ))}
-      </div>
-      <Button onClick={(e) => { e.preventDefault(); append({}); }}>+</Button>
       <Button disabled={isSubmitting} className="mt-2">{isSubmitting ? 'Идет загрузка...' : submitButtonText}</Button>
     </form>
   );

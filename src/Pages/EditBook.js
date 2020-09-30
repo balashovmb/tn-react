@@ -14,7 +14,6 @@ const EditBook = ({ match: { params } }) => {
   const book = useBooks([params.id]);
 
   const onSubmit = async ({ Cover, ...fields }) => {
-    console.log('fields',fields)
     const formData = new FormData();
     formData.append('fileUpload', Cover[0]);
     const uploadResult = await uploadFile(formData);
