@@ -9,12 +9,18 @@ const Select = ({ values, register, errors, propToShow, label, control, valuesOf
     name: inputProps.name,
   });
   const cvl = valuesOfCurrentObj.length;
+  console.log(cvl)
+  for (let index = 0; index < cvl; index++) {
+    append({})
+    
+  }
   return (
     <div className="mt-2">
 
-      {fields.map(({ id }, index) => (
-        <div key={id}>
-          <select className="border rounded bg-primary" name={`${inputProps.name}[${index}].value`} ref={register}>
+      {fields.map((field, index) => (
+        <div key={field.id}>
+          {console.log(index)}
+          <select className="border rounded bg-primary" name={`${inputProps.name}[${index}].value`} ref={register()}>
             <option value="">Выберите {label}</option>
             {values && values.map(v => <option value={v.Id} key={v.Id}>{v[propToShow]}</option>)}
           </select>
