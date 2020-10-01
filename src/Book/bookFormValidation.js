@@ -39,10 +39,10 @@ const schema = (schemaType) => {
     'required',
     errors.authors,
     value => {
-      let res = true;
       if (!value) return false;
+      let res = false;
       value.forEach(element => {
-        if (!element || !element.value) { res = false; }
+        if (element && element.value) { res = true; }
       });
       return res;
     }
@@ -59,7 +59,7 @@ const schema = (schemaType) => {
     ExpectedAmount: yup.number().min(0),
     Subscribers: yup.number().min(0),
     Authors: authors,
-    // yup.array().of(yup.object().shape({ value: yup.string().min(10) })).required()
+    // Cover: yup.array().of(yup.object().shape({ value: yup.string().required() })).required()
     // Cover: cover
   });
 };

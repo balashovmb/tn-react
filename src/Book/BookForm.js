@@ -30,7 +30,13 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
       <Field errors={errors} name="Subscribers" label="Подписчики" register={register} defaultValue={book ? book.Subscribers : 0} />
       <AuthorSelect allAuthors={allAuthors} register={register} errors={errors} control={control} bookAuthors={book ? book.Authors : ''} />
       <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} />
-      {book && book.Cover && <BookCover className="mt-2" cover={book.Cover} title={book.title} />}
+      {book && book.Cover
+        && (
+          <>
+            <BookCover className="mt-2" cover={book.Cover} title={book.title} />
+            <Field name="OldCoverUrl" register={register} defaultValue={book.Cover} hidden />
+          </>
+        )}
       <Button disabled={isSubmitting} className="mt-2">{isSubmitting ? 'Идет загрузка...' : submitButtonText}</Button>
     </form>
   );
