@@ -1,4 +1,5 @@
 const formFiedsToObj = (fields, coverUrl) => {
+  console.log(fields)
   const obj = {
     ...fields,
     Cover: coverUrl || fields.OldCoverUrl,

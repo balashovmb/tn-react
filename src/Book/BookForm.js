@@ -1,6 +1,7 @@
-import React from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import React, { useCallback, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
+import { useDropzone } from 'react-dropzone';
 
 import Field from './Field';
 import AuthorSelect from './AuthorSelect';
@@ -17,6 +18,9 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
   const allAuthors = useAuthors();
   const submitButtonText = book ? 'Сохранить изменения' : 'Добавить книгу';
 
+  const [dropedFiles, setDropedFiles] = useState([]);
+
+  console.log('dff', dropedFiles)
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
       <Field errors={errors} name="Title" label="Название" register={register} defaultValue={book ? book.Title : ''} />
@@ -29,7 +33,8 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
       <Field errors={errors} name="ExpectedAmount" label="Ожидаемая сумма" register={register} defaultValue={book ? book.ExpectedAmount : 0} />
       <Field errors={errors} name="Subscribers" label="Подписчики" register={register} defaultValue={book ? book.Subscribers : 0} />
       <AuthorSelect allAuthors={allAuthors} register={register} errors={errors} control={control} bookAuthors={book ? book.Authors : ''} />
-      <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} />
+      <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} defaultValue={dropedFiles[0] ? dropedFiles[0] : ''} />
+      <MyDropzone register={register} setDropedFiles={setDropedFiles} dropedFiles={dropedFiles} />
       {book && book.Cover
         && (
           <>
@@ -43,3 +48,27 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
 };
 
 export default BookForm;
+
+function MyDropzone({ register, dropedFiles, setDropedFiles }) {
+  const onDrop = useCallback(acceptedFiles => {
+    setDropedFiles(() => acceptedFiles);
+  }, [])
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
+
+  return (
+    <div {...getRootProps()}>
+      <input name="Fileee" ref={register} {...getInputProps()} />
+      {
+        isDragActive ?
+          <p>Drop the files here ...</p> :
+          <p>Drag 'n' drop some files here, or click to select files</p>
+      }
+    </div>
+  )
+}
