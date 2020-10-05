@@ -13,10 +13,10 @@ const OldValuesOfSelect = ({ register, propToShow, fieldsLength, name, oldValues
   };
 
   return (oldValuesToSave().map((val, index) => (
-    <div key={val.Id}>
+    <div key={val.Id} className="mt-2">
       <span>{val[propToShow]} </span>
       <input ref={register} name={`${name}[${fieldsLength + index + 1}].value`} defaultValue={val.Id} hidden />
-      <Button onClick={() => excludeValue(val.Id)}>Удалить {label}</Button>
+      <Button className="p-0" onClick={() => excludeValue(val.Id)}>Удалить {label}</Button>
     </div>
   )));
 };

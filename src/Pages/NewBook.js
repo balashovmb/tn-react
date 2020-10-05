@@ -12,8 +12,9 @@ import formFieldsToObj from '../Book/formFieldsToObj';
 const NewBook = () => {
   const history = useHistory();
 
-  const onSubmit = async ({ Cover, ...fields }) => {
-    console.log('cover',Cover)
+  const onSubmit = async ({ Cover,Fileee,  ...fields }) => {
+    console.info(Fileee)
+    console.log('cover',Cover.value)
     const formData = new FormData();
     // formData.append('fileUpload', Cover[0]);
     // const uploadResult = await uploadFile(formData);

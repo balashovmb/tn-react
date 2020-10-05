@@ -12,7 +12,7 @@ import schema from './bookFormValidation';
 
 const BookForm = ({ onSubmit, book, schemaType }) => {
   const {
-    control, errors, register, handleSubmit, formState: { isSubmitting }
+    control, errors, register, handleSubmit, formState: { isSubmitting }, setValue
   } = useForm({ resolver: yupResolver(schema(schemaType)) });
 
   const allAuthors = useAuthors();
@@ -20,7 +20,10 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
 
   const [dropedFiles, setDropedFiles] = useState([]);
 
-  console.log('dff', dropedFiles)
+  React.useEffect(() => {
+    register({ name: 'Fileee' });
+  }, []);
+  console.log('dff', dropedFiles);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
       <Field errors={errors} name="Title" label="Название" register={register} defaultValue={book ? book.Title : ''} />
@@ -32,43 +35,52 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
       <Field errors={errors} name="Amount" label="Собранная сумма" register={register} defaultValue={book ? book.Amount : 0} />
       <Field errors={errors} name="ExpectedAmount" label="Ожидаемая сумма" register={register} defaultValue={book ? book.ExpectedAmount : 0} />
       <Field errors={errors} name="Subscribers" label="Подписчики" register={register} defaultValue={book ? book.Subscribers : 0} />
+      <div className="font-bold mt-2">Авторы</div>
       <AuthorSelect allAuthors={allAuthors} register={register} errors={errors} control={control} bookAuthors={book ? book.Authors : ''} />
-      <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} defaultValue={dropedFiles[0] ? dropedFiles[0] : ''} />
-      <MyDropzone register={register} setDropedFiles={setDropedFiles} dropedFiles={dropedFiles} />
+      <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} hidden />
+      <MyDropzone register={register} setDropedFiles={setDropedFiles} dropedFiles={dropedFiles} setValue={setValue} />
       {book && book.Cover
-        && (
-          <>
-            <BookCover className="mt-2" cover={book.Cover} title={book.title} />
-            <Field name="OldCoverUrl" register={register} defaultValue={book.Cover} hidden />
-          </>
-        )}
-      <Button disabled={isSubmitting} className="mt-2">{isSubmitting ? 'Идет загрузка...' : submitButtonText}</Button>
+        && <OldCover register={register} book={book} />}
+      <Button type="submit" disabled={isSubmitting} className="mt-2">{isSubmitting ? 'Идет загрузка...' : submitButtonText}</Button>
     </form>
   );
 };
 
 export default BookForm;
 
-function MyDropzone({ register, dropedFiles, setDropedFiles }) {
-  const onDrop = useCallback(acceptedFiles => {
-    setDropedFiles(() => acceptedFiles);
-  }, [])
-  const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
-
+const MyDropzone = ({ setValue }) => {
+  const { acceptedFiles, getRootProps } = useDropzone({
+    onDrop: files => {
+      setValue('Cover', files[0]);
+    },
+    maxFiles: 1
+  });
 
   return (
-    <div {...getRootProps()}>
-      <input name="Fileee" ref={register} {...getInputProps()} />
-      {
-        isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
-      }
+    <div className="mt-2">
+      <div {...getRootProps()} className="w-64 border border-gray-400  bg-primary mt-2 rounded">
+        <span>Поместите сюда файл с изображением обложки</span>
+      </div>
+      {acceptedFiles[0] && <CoverToUpload files={acceptedFiles} />}
     </div>
-  )
-}
+  );
+};
+
+const CoverToUpload = ({ files }) => (
+  <div>
+    <div>Выбранный файл</div>
+    {files.map(file => (
+      <li className="ml-4" key={file.path}>
+        {file.path} - {file.size} bytes
+      </li>
+    ))}
+  </div>
+);
+
+const OldCover = ({ book, register }) => (
+  <div className="mt-2">
+    <div>Загруженная обложка</div>
+    <BookCover className="mt-2" cover={book.Cover} title={book.title} />
+    <Field name="OldCoverUrl" register={register} defaultValue={book.Cover} hidden />
+  </div>
+);
