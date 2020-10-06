@@ -34,3 +34,9 @@ export function updateBook(fields, id) {
       .then(result => result.data)
   );
 }
+
+export function deleteBooks(ids) {
+  return (
+    httpClient.delete('/Books', { params: { records: ids } })
+      .then(result => result.data));
+}

@@ -11,6 +11,7 @@ export default function mapRecordFromAirtable(record) {
     ['Id', 'Name', 'Info', 'AvatarUrl', 'Email'],
     record
   ));
+  const authorsString = record.fields['Name (from Authors)'] ? record.fields['Name (from Authors)'].join(', ') : '';
   return ({
     Title: record.fields.Title,
     Annotation: record.fields.Annotation,
@@ -25,6 +26,7 @@ export default function mapRecordFromAirtable(record) {
     Subscribers: record.fields.Subscribers,
     Authors: authors,
     SimilarBooksIds: record.fields.SimilarBooks,
-    Id: record.id
+    Id: record.id,
+    AuthorsString: authorsString
   });
 }

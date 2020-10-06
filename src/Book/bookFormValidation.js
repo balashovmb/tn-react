@@ -49,18 +49,17 @@ const schema = (schemaType) => {
   );
 
   return yup.object().shape({
-    // Title: yup.string().required(errors.required),
-    // Annotation: yup.string().required(errors.required),
-    // Pages: yup.number().min(10, errors.pages),
-    // Progress: yup.number().min(0, errors.progress).max(100, errors.progress),
-    // MinimalPrice: yup.number().min(100, errors.minimal),
-    // ExpectedPrice: yup.number().min(100, errors.expected),
-    // Amount: yup.number().min(0),
-    // ExpectedAmount: yup.number().min(0),
-    // Subscribers: yup.number().min(0),
-    // Authors: authors,
-    // Cover: yup.array().of(yup.object().shape({ value: yup.string().required() })).required()
-    // Cover: cover
+    Title: yup.string().required(errors.required),
+    Annotation: yup.string().required(errors.required),
+    Pages: yup.number().min(10, errors.pages),
+    Progress: yup.number().min(0, errors.progress).max(100, errors.progress),
+    MinimalPrice: yup.number().min(100, errors.minimal),
+    ExpectedPrice: yup.number().min(100, errors.expected),
+    Amount: yup.number().min(0),
+    ExpectedAmount: yup.number().min(0),
+    Subscribers: yup.number().min(0),
+    Authors: authors,
+    Cover: cover
   });
 };
 
