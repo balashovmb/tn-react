@@ -12,15 +12,12 @@ import formFieldsToObj from '../Book/formFieldsToObj';
 const NewBook = () => {
   const history = useHistory();
 
-  const onSubmit = async ({ Cover,Fileee,  ...fields }) => {
-    console.info(Fileee)
-    console.log('cover',Cover.value)
+  const onSubmit = async ({ Cover, ...fields }) => {
     const formData = new FormData();
-    // formData.append('fileUpload', Cover[0]);
-    // const uploadResult = await uploadFile(formData);
-    // const coverUrl = (uploadResult && uploadResult.url) ? uploadResult.url : '';
-    console.info(formFieldsToObj(fields))
-    const res = await createBook(formFieldsToObj(fields))//, coverUrl));
+    formData.append('fileUpload', Cover[0]);
+    const uploadResult = await uploadFile(formData);
+    const coverUrl = (uploadResult && uploadResult.url) ? uploadResult.url : '';
+    const res = await createBook(formFieldsToObj(fields), coverUrl);
 
     const newBook = res.records[0];
     const redirectURI = bookPath(newBook.id);

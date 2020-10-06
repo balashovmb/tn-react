@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import { useDropzone } from 'react-dropzone';
@@ -18,12 +18,6 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
   const allAuthors = useAuthors();
   const submitButtonText = book ? 'Сохранить изменения' : 'Добавить книгу';
 
-  const [dropedFiles, setDropedFiles] = useState([]);
-
-  React.useEffect(() => {
-    register({ name: 'Fileee' });
-  }, []);
-  console.log('dff', dropedFiles);
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
       <Field errors={errors} name="Title" label="Название" register={register} defaultValue={book ? book.Title : ''} />
@@ -38,7 +32,7 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
       <div className="font-bold mt-2">Авторы</div>
       <AuthorSelect allAuthors={allAuthors} register={register} errors={errors} control={control} bookAuthors={book ? book.Authors : ''} />
       <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} hidden />
-      <MyDropzone register={register} setDropedFiles={setDropedFiles} dropedFiles={dropedFiles} setValue={setValue} />
+      <CoverDropzone register={register} setValue={setValue} />
       {book && book.Cover
         && <OldCover register={register} book={book} />}
       <Button type="submit" disabled={isSubmitting} className="mt-2">{isSubmitting ? 'Идет загрузка...' : submitButtonText}</Button>
@@ -48,7 +42,7 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
 
 export default BookForm;
 
-const MyDropzone = ({ setValue }) => {
+const CoverDropzone = ({ setValue }) => {
   const { acceptedFiles, getRootProps } = useDropzone({
     onDrop: files => {
       setValue('Cover', files[0]);
