@@ -13,6 +13,7 @@ const NewBook = () => {
   const history = useHistory();
 
   const onSubmit = async ({ Cover, ...fields }) => {
+    console.info('on submit', Cover)
     const formData = new FormData();
     formData.append('fileUpload', Cover[0]);
     const uploadResult = await uploadFile(formData);

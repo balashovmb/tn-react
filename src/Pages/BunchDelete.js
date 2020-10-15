@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 
 import useBooks from '../hooks/useBooks';
 import SmallListItem from '../Book/SmallListItem';
@@ -23,13 +22,13 @@ const BunchDelete = () => {
 
   const runDeleteBooks = async () => {
     await deleteBooks(booksToDelete);
+    setBooksToDelete(() => []);
     setDownloadCounter(() => downloadCounter + 1);
   };
 
   return (
     <>
       <TextHeader>Выберите книги для удаления</TextHeader>
-
       <div className="border-b-2 pb-1">
         {
           books
@@ -38,11 +37,7 @@ const BunchDelete = () => {
               currentBook.Authors = book.AuthorsString;
               return (
                 <SmallListItem book={currentBook} key={currentBook.Id}>
-
-                  <Button type="button" className="m-1 text-sm" onClick={() => toggleBookToDelete(book.Id)}>
-                    {booksToDelete.includes(book.Id) ? 'Не удалять' : 'Выбрать'}
-                  </Button>
-
+                  <input type="checkbox" onChange={() => toggleBookToDelete(book.Id)} value={booksToDelete.includes(book.Id)} />
                 </SmallListItem>
               );
             })

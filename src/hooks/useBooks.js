@@ -28,6 +28,7 @@ const useBooks = (bookIds, downloadCounter) => {
       setRecords(records);
     });
   }, [downloadCounter]);
+  console.log(records)
   return records;
 };
 

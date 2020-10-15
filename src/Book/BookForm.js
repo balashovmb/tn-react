@@ -58,8 +58,8 @@ export default BookForm;
 const CoverDropzone = ({ setValue }) => {
   const { acceptedFiles, getRootProps } = useDropzone({
     onDrop: files => {
-      console.log(files)
-      setValue('Cover', files[0]);
+      console.log('files dropzone', files[0])
+      setValue('Cover', files);
     },
     maxFiles: 1
   });
