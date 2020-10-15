@@ -8,40 +8,48 @@ import Button from '../common/Button';
 import TextHeader from '../common/TextHeader';
 
 const BunchDelete = () => {
-  const {
-    register, handleSubmit, formState: { isSubmitting }
-  } = useForm();
-
   const [downloadCounter, setDownloadCounter] = useState(1);
 
+  const [booksToDelete, setBooksToDelete] = useState([]);
+
   const books = useBooks('', downloadCounter);
-  const onSubmit = async (books) => {
-    const bookIds = Object.entries(books).filter(([key, value]) => value).map(el => el[0]);
-    await deleteBooks(bookIds);
+
+  const toggleBookToDelete = (bookId) => {
+    const newBooksToDelete = booksToDelete.includes(bookId)
+      ? booksToDelete.filter(item => item !== bookId)
+      : [...booksToDelete, bookId];
+    setBooksToDelete(() => newBooksToDelete);
+  };
+
+  const runDeleteBooks = async () => {
+    await deleteBooks(booksToDelete);
     setDownloadCounter(() => downloadCounter + 1);
   };
+
   return (
     <>
       <TextHeader>Выберите книги для удаления</TextHeader>
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
-        <div className="border-b-2 pb-1">
-          {
-            books
-              ? books.map(book => {
-                const currentBook = book;
-                currentBook.Authors = book.AuthorsString;
-                return (
-                  <SmallListItem book={currentBook} key={currentBook.Id}>
-                    <label htmlFor={`scheckbox${currentBook.Id}`}>Удалить</label>
-                    <input className="ml-1" type="checkbox" id={`checkbox${currentBook.Id}`} name={`${currentBook.Id}`} ref={register} />
-                  </SmallListItem>
-                );
-              })
-              : <div> Идет загрузка</div>
-          }
-        </div>
-        <Button className="mt-4" type="submit" disabled={isSubmitting}>{isSubmitting ? 'Удаление...' : 'Удалить выбранные'}</Button>
-      </form>
+
+      <div className="border-b-2 pb-1">
+        {
+          books
+            ? books.map(book => {
+              const currentBook = book;
+              currentBook.Authors = book.AuthorsString;
+              return (
+                <SmallListItem book={currentBook} key={currentBook.Id}>
+
+                  <Button type="button" className="m-1 text-sm" onClick={() => toggleBookToDelete(book.Id)}>
+                    {booksToDelete.includes(book.Id) ? 'Не удалять' : 'Выбрать'}
+                  </Button>
+
+                </SmallListItem>
+              );
+            })
+            : <div> Идет загрузка</div>
+        }
+      </div>
+      <Button type="button" className="m-1 text-sm" onClick={runDeleteBooks}>Удалить выбранные</Button>
     </>
 
   );

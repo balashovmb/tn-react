@@ -15,7 +15,7 @@ const SmallListItem = React.memo((props) => {
       <div className="ml-2">
         <div className="font-bold">{Title}</div>
         <div>{Authors}</div>
-        <>{props.children}</>
+        {props.children}
       </div>
     </div>
   );
