@@ -1,12 +1,11 @@
 import React from 'react';
-import Button from '../common/Button';
 
-const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
+const SmallListItem = React.memo((props) => {
   const {
     Cover,
     Title,
     Authors
-  } = book;
+  } = props.book;
 
   return (
     <div className="flex flex-row mt-2 border-t-2 pt-1">
@@ -16,10 +15,10 @@ const SimilarBook = React.memo(({ book, removeFromSimilarBook }) => {
       <div className="ml-2">
         <div className="font-bold">{Title}</div>
         <div>{Authors}</div>
-        <Button type="button" className="m-1 text-sm" onClick={() => removeFromSimilarBook(book.Id)}>Убрать</Button>
+        {props.children}
       </div>
     </div>
   );
 });
 
-export default SimilarBook;
+export default SmallListItem;

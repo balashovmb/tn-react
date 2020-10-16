@@ -5,9 +5,9 @@ const Field = ({ errors, register, label, type, className, defaultValue, ...inpu
   const Component = type === 'textarea' ? 'textarea' : 'input';
   return (
     <div>
-      <label className="block mt-1" htmlFor={inputProps.name}>{label}</label>
+      <label className="block mt-1 font-bold" htmlFor={inputProps.name}>{label}</label>
       <Component
-        className={cx('border border-gray-500 rounded w-full md:w-1/2', inputProps.className)}
+        className={cx('border border-gray-500 rounded w-full md:w-1/2 bg-primary', inputProps.className)}
         ref={register}
         type={type}
         defaultValue={defaultValue}

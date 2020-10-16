@@ -20,9 +20,8 @@ const useAuthors = () => {
   const [authors, setAuthors] = useState(null);
 
   useEffect(() => {
-    _fetchData().then(records => {
-      setAuthors(records);
-    });
+    _fetchData()
+      .then(records => { setAuthors(records); });
   }, []);
   return authors;
 };
