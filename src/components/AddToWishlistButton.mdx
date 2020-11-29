@@ -1,0 +1,23 @@
+---
+name: AddToWishlistButton
+---
+
+import AddToWishlistButton from '../Book/AddToWishlistButton';
+import {WishlistContext} from '../Book/WishlistProvider';
+
+import { Playground } from 'docz';
+
+# AddToWishlistButton
+
+Кнопка добавления книги в список желаемого, либо исключения из списка. Если книга в списке, надпись на кнопке "Убрать из желаемого", если нет - "Добавить в желаемое". 
+
+
+<Playground>
+  <WishlistContext.Provider value={{ isWishedBook: () => (true) }}>
+    <AddToWishlistButton book={{id: 1}}/>
+  </WishlistContext.Provider>
+  <br/>
+  <WishlistContext.Provider value={{ isWishedBook: () => (false) }}>
+    <AddToWishlistButton book={{id: 1}}/>
+  </WishlistContext.Provider>
+</Playground>
