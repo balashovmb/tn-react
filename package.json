@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack",
-    "test": "jest"
+    "test": "jest",
+    "docz:dev": "docz dev"
   },
   "author": "",
   "license": "ISC",
@@ -39,8 +40,10 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^0.1.1",
+    "@testing-library/user-event": "^12.2.2",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "docz": "^2.3.1",
     "history": "^4.1.0",
     "lodash": "^4.17.19",
     "react": "^16.13.1",

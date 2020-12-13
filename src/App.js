@@ -7,18 +7,21 @@ import ThemeContextProvider from './common/ThemeContext';
 import AppRoutes from './common/AppRoutes';
 import WishlistProvider from './Book/WishlistProvider';
 
-const history = createBrowserHistory();
+const browserHistory = createBrowserHistory();
 
-const App = () => (
-  <ThemeContextProvider>
-    <WishlistProvider>
-      <Router history={history}>
-        <Layout>
-          <AppRoutes />
-        </Layout>
-      </Router>
-    </WishlistProvider>
-  </ThemeContextProvider>
-);
+const App = (props) => {
+  const history = props.history || browserHistory;
+  return (
+    <ThemeContextProvider>
+      <WishlistProvider>
+        <Router history={history}>
+          <Layout>
+            <AppRoutes />
+          </Layout>
+        </Router>
+      </WishlistProvider>
+    </ThemeContextProvider>
+  );
+};
 
 export default App;

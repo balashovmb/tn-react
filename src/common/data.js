@@ -64,7 +64,7 @@ const user = {
   email: 'stepan@ivanov.org',
   firstName: 'Stepan',
   lastName: 'Ivanov',
-  avatarUrl: 'https://imageproxy.ifunny.co/noop/user_photos/be199eb6d91c6160b18c91d3189f33a8a581a96b_0.jpg'
+  avatarUrl: 'https://www.clipartmax.com/png/middle/448-4486985_400-x-667-2-poker-face-meme.png'
 }
 
 const book2Author = {
