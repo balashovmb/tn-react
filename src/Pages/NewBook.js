@@ -13,12 +13,11 @@ const NewBook = () => {
   const history = useHistory();
 
   const onSubmit = async ({ Cover, ...fields }) => {
-    console.info('on submit', Cover)
     const formData = new FormData();
     formData.append('fileUpload', Cover[0]);
     const uploadResult = await uploadFile(formData);
     const coverUrl = (uploadResult && uploadResult.url) ? uploadResult.url : '';
-    const res = await createBook(formFieldsToObj(fields), coverUrl);
+    const res = await createBook(formFieldsToObj(fields, coverUrl));
 
     const newBook = res.records[0];
     const redirectURI = bookPath(newBook.id);

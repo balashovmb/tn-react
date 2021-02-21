@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
 import { useDropzone } from 'react-dropzone';
@@ -44,8 +44,7 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
       <Field errors={errors} name="Subscribers" label="Подписчики" register={register} />
       <div className="font-bold mt-2">Авторы</div>
       <AuthorSelect allAuthors={allAuthors} register={register} errors={errors} control={control} bookAuthors={book ? book.Authors : ''} />
-      <Field type="file" name="Cover" label="Обложка" register={register} errors={errors} hidden />
-      <CoverDropzone register={register} setValue={setValue} />
+      <CoverDropzone register={register} setValue={setValue} name="Cover" />
       {book && book.Cover
         && <OldCover register={register} book={book} />}
       <Button type="submit" disabled={isSubmitting} className="mt-2">{isSubmitting ? 'Идет загрузка...' : submitButtonText}</Button>
@@ -55,19 +54,20 @@ const BookForm = ({ onSubmit, book, schemaType }) => {
 
 export default BookForm;
 
-const CoverDropzone = ({ setValue }) => {
-  const { acceptedFiles, getRootProps } = useDropzone({
+const CoverDropzone = ({ register, setValue, name }) => {
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     onDrop: files => {
-      console.log('files dropzone', files[0])
-      setValue('Cover', files);
+      setValue(name, files);
     },
     maxFiles: 1
   });
+  useEffect(() => register(name));
 
   return (
     <div className="mt-2">
       <div {...getRootProps()} className="w-64 border border-gray-400  bg-primary mt-2 rounded">
         <span>Поместите сюда файл с изображением обложки</span>
+        <input {...getInputProps()} />
       </div>
       {acceptedFiles[0] && <CoverToUpload files={acceptedFiles} />}
     </div>
